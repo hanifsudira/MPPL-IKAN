@@ -6,7 +6,17 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-class HomeController extends Controller
-{
-    //
+class HomeController extends Controller{
+
+    public function index(){
+        return view("home");
+    }
+
+    public function login(){
+        return view("login");
+    }
+
+    public function register(){
+        return view("register");
+    }
 }

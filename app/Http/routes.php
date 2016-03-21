@@ -11,14 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index') ;
 
-Route::get('admin',function(){
-	return view('admin_template');
-});
+Route::get('login','HomeController@login');
 
+Route::get('register','HomeController@register');
 /*
 |--------------------------------------------------------------------------
 | Application Routes

@@ -16,6 +16,18 @@ Route::get('/', 'HomeController@index') ;
 Route::get('login','HomeController@login');
 
 Route::get('register','HomeController@register');
+
+Route::get('newpost','PostController@newpost');
+
+Route::get('editpost','PostController@editpost');
+
+Route::get('posting','PostController@posting');
+
+Route::get('profile','HomeController@profile');
+
+Route::get('editprofile','HomeController@editprofile');
+
+Route::get('listsearch','PostController@listsearch');
 /*
 |--------------------------------------------------------------------------
 | Application Routes

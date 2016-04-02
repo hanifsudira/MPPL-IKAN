@@ -19,4 +19,12 @@ class HomeController extends Controller{
     public function register(){
         return view("register");
     }
+
+    public function profile(){
+        return view("profile");
+    }
+
+    public function editprofile(){
+        return view("editprofile");
+    }
 }

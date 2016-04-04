@@ -30,6 +30,7 @@
 <div class="wrapper">
 
     <header class="main-header">
+    
         <nav class="navbar navbar-static-top" role="navigation">
             <div class="container">
                 <div class="navbar-header">
@@ -38,6 +39,98 @@
                         <i class="fa fa-bars"></i>
                     </button>
                 </div>
+
+                <!-- Login -->
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                      <!-- User Account: style can be found in dropdown.less -->
+                      <li class="dropdown user user-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                          <span class="hidden-xs">Login</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                          <li class="user-header">
+                            <p>
+                                Login
+                            </p>
+                          </li>
+
+
+                          <!-- Menu Body -->
+                          <li class="user-body">
+                            <div class="row">
+                              <div class="col-xs-8 text-center">
+                                <p>Sudah punya akun?</p>
+                              </div>
+                              <div class="col-xs-4 text-center">
+                                <a href="{{ action("HomeController@login") }}" class="btn btn-default btn-flat">Login</a>
+                              </div>
+                            </div>
+                            <!-- /.row -->
+                          </li>
+
+
+                          <!-- Menu Footer-->
+                          <li class="user-footer">
+                            <div class="col-xs-8 text-center">
+                              <p>Belum punya akun?</p>
+                            </div>
+                            <div class="col-xs-4 text-center">
+                              <a href="{{ action("HomeController@register") }}" class="btn btn-default btn-flat">Register</a>
+                            </div>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </div>
+
+                <!-- Logout -->
+                <div style="display:none" class="navbar-custom-menu" >
+                    <ul class="nav navbar-nav">
+                      <!-- User Account: style can be found in dropdown.less -->
+                      <li class="dropdown user user-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                          <span class="hidden-xs">Nama</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                          <li class="user-header">
+                            <p>
+                                Nama
+                            </p>
+                          </li>
+
+
+                          <!-- Menu Body -->
+<!--                           <li class="user-body">
+                            <div class="row">
+                              <div class="col-xs-4 text-center">
+                                <a href="#">Followers</a>
+                              </div>
+                              <div class="col-xs-4 text-center">
+                                <a href="#">Sales</a>
+                              </div>
+                              <div class="col-xs-4 text-center">
+                                <a href="#">Friends</a>
+                              </div>
+                            </div> -->
+                            <!-- /.row -->
+                          <!-- </li> -->
+
+
+                          <!-- Menu Footer-->
+                          <li class="user-footer">
+                            <div class="pull-left">
+                              <a href="#" class="btn btn-default btn-flat">Profile</a>
+                            </div>
+                            <div class="pull-right">
+                              <a href="{{ action("HomeController@profile") }}" class="btn btn-default btn-flat">Sign out</a>
+                            </div>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </div>
+
                 <!-- /.navbar-collapse -->
                 <!-- Navbar Right Menu -->
                 <!-- /.navbar-custom-menu -->

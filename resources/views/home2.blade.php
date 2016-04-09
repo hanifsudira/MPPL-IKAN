@@ -182,40 +182,46 @@
                 </div>
                 <!-- /.box -->
             </section>
+            
             <section class="content">
-                <div class="box-body">
-                    <!-- post text -->
-                    <p>Far far away, behind the word mountains, far from the
-                        countries Vokalia and Consonantia, there live the blind
-                        texts. Separated they live in Bookmarksgrove right at</p>
-
-                    <p>the coast of the Semantics, a large language ocean.
-                        A small river named Duden flows by their place and supplies
-                        it with the necessary regelialia. It is a paradisematic
-                        country, in which roasted parts of sentences fly into
-                        your mouth.</p>
-
-                    <!-- Attachment -->
-                    <div class="attachment-block clearfix">
-                        <img class="attachment-img" src="../dist/img/photo1.png" alt="Attachment Image">
-
-                        <div class="attachment-pushed">
-                            <h4 class="attachment-heading"><a href="http://www.lipsum.com/">Lorem ipsum text generator</a></h4>
-
-                            <div class="attachment-text">
-                                Description about the attachment can be placed here.
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry... <a href="#">more</a>
-                            </div>
-                            <!-- /.attachment-text -->
-                        </div>
-                        <!-- /.attachment-pushed -->
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <i class="fa fa-newspaper-o"></i>
+                        <h3 class="box-title">Post</h3>
                     </div>
-                    <!-- /.attachment-block -->
 
-                    <!-- Social sharing buttons -->
-                    <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i> Share</button>
-                    <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> Like</button>
-                    <span class="pull-right text-muted">45 likes - 2 comments</span>
+                    <div class="box-body">
+                        <!-- Post -->
+                        <div class="post">
+                          <div class="user-block">
+                            <img class="img-circle img-bordered-sm" src="../../dist/img/user1-128x128.jpg" alt="user image">
+                                <span class="username">
+                                  <a href="#">Jonathan Burke Jr.</a>
+                                  <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
+                                </span>
+                            <span class="description">Shared publicly - 7:30 PM today</span>
+                          </div>
+                          <!-- /.user-block -->
+                          <p>
+                            Lorem ipsum represents a long-held tradition for designers,
+                            typographers and the like. Some people hate it and argue for
+                            its demise, but others ignore the hate as they create awesome
+                            tools to help create filler text for everyone from bacon lovers
+                            to Charlie Sheen fans.
+                          </p>
+                          <ul class="list-inline">
+                            <li><a href="#" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i> Share</a></li>
+                            <li><a href="#" class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i> Like</a>
+                            </li>
+                            <li class="pull-right">
+                              <a href="#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> Comments
+                                (5)</a></li>
+                          </ul>
+
+                          <input class="form-control input-sm" type="text" placeholder="Type a comment">
+                        </div>
+                        <!-- /.post -->
+                    </div>
                 </div>
             </section>
             <!-- /.content -->

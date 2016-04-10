@@ -17,6 +17,8 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="{{asset("bower_components/AdminLTE/dist/css/skins/_all-skins.min.css")}}">
+    <!-- bootstrap wysihtml5 - text editor -->
+    <link rel="stylesheet" href="{{asset("bower_components/AdminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css")}}">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -38,6 +40,23 @@
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
                         <i class="fa fa-bars"></i>
                     </button>
+                </div>
+
+                <!-- Pencarian -->
+                <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+                    <form class="navbar-form navbar-left" role="search">
+                        <button type="button" style="height: 34px" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Kategori
+                            <span class="fa fa-caret-down"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Laut</a></li>
+                            <li><a href="#">Tawar</a></li>
+                        </ul>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="navbar-search-input" placeholder="Cari">
+                            <button type="button" style="height: 34px" class="btn btn-info btn-flat">Cari</button>
+                        </div>
+                    </form>
                 </div>
 
                 <!-- Login -->
@@ -186,7 +205,19 @@
 <script src="{{asset("bower_components/AdminLTE/dist/js/demo.js")}}"></script>
 <!-- FLOT CATEGORIES PLUGIN - Used to draw bar charts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+<!-- CK Editor -->
+<script src="https://cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
+
+
 <script>
+    $(function () {
+        // Replace the <textarea id="editor1"> with a CKEditor
+        // instance, using default configuration.
+        CKEDITOR.replace('editor1');
+        //bootstrap WYSIHTML5 - text editor
+        $(".textarea").wysihtml5();
+    });
+
     var data = {
         labels: ["January", "February", "March", "April", "May", "June", "July"],
         datasets: [

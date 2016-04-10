@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home2');
 });
 
 Route::get('/home2', 'PostController@index');
@@ -26,6 +26,8 @@ Route::get('/posting', 'PostController@posting');
 Route::get('/newpost', 'PostController@newpost');
 
 Route::get('/editpost', 'PostController@editpost');
+
+Route::get('/listsearch', 'PostController@listsearch');
 
 Route::get('/profile', 'HomeController@profile');
 

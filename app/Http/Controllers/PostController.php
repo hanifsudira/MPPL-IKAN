@@ -47,12 +47,17 @@ class PostController extends Controller
     {
         return view('newpost');
     }
-    
+
     public function editpost()
     {
         return view('editpost');
     }
-    
+
+    public function listsearch()
+    {
+        return view('listsearch');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

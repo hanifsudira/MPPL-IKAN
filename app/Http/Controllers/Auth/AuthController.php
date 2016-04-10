@@ -28,14 +28,14 @@ class AuthController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home2';
+    protected $redirectTo = '/';
     
     /**
      * Where to redirect users after login / registration.
      *
      * @var string
      */
-    protected $redirectAfterLogout = '/home2';
+    protected $redirectAfterLogout = '/';
 
     /**
      * Create a new authentication controller instance.

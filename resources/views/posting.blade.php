@@ -80,7 +80,7 @@
                                 <p>Sudah punya akun?</p>
                               </div>
                               <div class="col-xs-4 text-center">
-                                <a href="{{ action("HomeController@login") }}" class="btn btn-default btn-flat">Login</a>
+                                <a href="{{ action("Auth\AuthController@login") }}" class="btn btn-default btn-flat">Login</a>
                               </div>
                             </div>
                             <!-- /.row -->
@@ -93,7 +93,7 @@
                               <p>Belum punya akun?</p>
                             </div>
                             <div class="col-xs-4 text-center">
-                              <a href="{{ action("HomeController@register") }}" class="btn btn-default btn-flat">Register</a>
+                              <a href="{{ action("Auth\AuthController@register") }}" class="btn btn-default btn-flat">Register</a>
                             </div>
                           </li>
                         </ul>

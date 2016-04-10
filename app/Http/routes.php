@@ -17,9 +17,19 @@ Route::get('/', function () {
 
 Route::get('/home2', 'PostController@index');
 
-Route::get('/login', 'PostController@login');
+Route::get('/login2', 'PostController@login');
 
-Route::get('/register', 'PostController@register');
+Route::get('/register2', 'PostController@register');
+
+Route::get('/posting', 'PostController@posting');
+
+Route::get('/newpost', 'PostController@newpost');
+
+Route::get('/editpost', 'PostController@editpost');
+
+Route::get('/profile', 'HomeController@profile');
+
+Route::get('/editprofile', 'HomeController@editprofile');
 
 Route::auth();
 

@@ -25,7 +25,7 @@ class PostController extends Controller
      */
     public function login()
     {
-        return view('login');
+        return view('login2');
     }
     
     /**
@@ -35,9 +35,24 @@ class PostController extends Controller
      */
     public function register()
     {
-        return view('register');
+        return view('register2');
     }
-
+    
+    public function posting()
+    {
+        return view('posting');
+    }
+    
+    public function newpost()
+    {
+        return view('newpost');
+    }
+    
+    public function editpost()
+    {
+        return view('editpost');
+    }
+    
     /**
      * Show the form for creating a new resource.
      *

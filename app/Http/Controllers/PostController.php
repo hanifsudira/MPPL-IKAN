@@ -58,7 +58,9 @@ class PostController extends Controller
 
     public function listsearch()
     {
-        return view('listsearch');
+        $data['post_list']=DB::select('call SP_Find("tes","tawar","grosir")');
+        $data['pencarian']="tes";
+        return view('listsearch',$data);
     }
 
     /**

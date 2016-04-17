@@ -46,7 +46,8 @@
                                             ?>
                                         </div>
                                     </div>
-                                @endforeach                            <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                                @endforeach
+                                    <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
                                 <span class="fa fa-angle-left"></span>
                             </a>
                             <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
@@ -61,41 +62,25 @@
                         <h3 class="box-title">New Post</h3>
                     </div>
                     <div class="box-body">
-                        <div class="post">
-                            <div class="user-block">
-                                <img class="img-circle img-bordered-sm" src="../../dist/img/user1-128x128.jpg" alt="user image">
+                        @foreach ($post_newer as $list)
+                            <div class="post">
+                                <div class="user-block">
+                                    <img class="img-circle img-bordered-sm" src="<?php echo ($list->path_foto);?>" alt="<?php echo ($list->username);?> image">
                             <span class='username'>
-                              <a href="#">Jonathan Burke Jr.</a>
+                              <a href="#"><?php echo ($list->fullname);?></a>
                             </span>
-                                <span class='description'>Shared publicly - 7:30 PM today</span>
+                                    <span class='description'>Shared publicly - <?php echo ($list->waktu);?></span>
+                                </div>
+                                <h4><a href="#"><?php echo ($list->judul);?></a></h4>
+                                <p>
+                                    <?php echo ($list->deskripsi);?>
+                                </p>
+                                <a class="btn btn-primary btn-xs">Read more</a>
                             </div>
-                            <p>
-                                Lorem ipsum represents a long-held tradition for designers,
-                                typographers and the like. Some people hate it and argue for
-                                its demise, but others ignore the hate as they create awesome
-                                tools to help create filler text for everyone from bacon lovers
-                                to Charlie Sheen fans.
-                            </p>
-                            <a class="btn btn-primary btn-xs">Read more</a>
-                        </div>
-                        <div class="post">
-                            <div class="user-block">
-                                <img class="img-circle img-bordered-sm" src="../../dist/img/user1-128x128.jpg" alt="user image">
-                            <span class='username'>
-                              <a href="#">Jonathan Burke Jr.</a>
-                            </span>
-                                <span class='description'>Shared publicly - 7:30 PM today</span>
-                            </div>
-                            <p>
-                                Lorem ipsum represents a long-held tradition for designers,
-                                typographers and the like. Some people hate it and argue for
-                                its demise, but others ignore the hate as they create awesome
-                                tools to help create filler text for everyone from bacon lovers
-                                to Charlie Sheen fans.
-                            </p>
-                            <a class="btn btn-primary btn-xs">Read more</a>
-                        </div>
-                    </div>
+
+                        @endforeach
+
+
 
                 </div>
                 <!-- /.box -->

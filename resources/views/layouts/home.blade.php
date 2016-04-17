@@ -19,7 +19,11 @@
     <link rel="stylesheet" href="{{asset("bower_components/AdminLTE/dist/css/skins/_all-skins.min.css")}}">
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="{{asset("bower_components/AdminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css")}}">
-
+    <style>
+        .content-wrapper{
+            margin-top: 50px;
+        }
+    </style>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -33,7 +37,7 @@
 
     <header class="main-header">
     
-        <nav class="navbar navbar-static-top" role="navigation">
+        <nav class="navbar navbar-fixed-top" role="navigation">
             <div class="container">
                 <div class="navbar-header">
                     <a href="#" class="navbar-brand">Lapak<b>Ikan</b></a>
@@ -43,18 +47,16 @@
                 </div>
 
                 <!-- Pencarian -->
-                <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
-                    <form class="navbar-form navbar-left" role="search">
-                        <button type="button" style="height: 34px" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Kategori
-                            <span class="fa fa-caret-down"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Laut</a></li>
-                            <li><a href="#">Tawar</a></li>
-                        </ul>
+                <div class="collapse navbar-collapse pull-left" >
+                    <form class="navbar-form ">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="navbar-search-input" placeholder="Cari">
-                            <button type="button" style="height: 34px" class="btn btn-info btn-flat">Cari</button>
+                            <input type="text" class="form-control" placeholder="Cari">
+                            <button type="button" class="btn btn-flat dropdown-toggle" data-toggle="dropdown">Kategori <span class="fa fa-caret-down"></span></button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Tawar</a></li>
+                                <li><a href="#">Laut</a></li>
+                            </ul>
+                            <button type="button" style="height: 34px" class="btn btn-flat">Cari</button>
                         </div>
                     </form>
                 </div>

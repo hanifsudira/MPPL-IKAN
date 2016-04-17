@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home2');
-});
+Route::get('/', 'PostController@index');
 
 Route::get('/home2', 'PostController@index');
 
@@ -32,6 +30,8 @@ Route::get('/listsearch', 'PostController@listsearch');
 Route::get('/profile', 'HomeController@profile');
 
 Route::get('/editprofile', 'HomeController@editprofile');
+
+Route::get('/cek/{id}', 'PostController@cek');
 
 Route::auth();
 

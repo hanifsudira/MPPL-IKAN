@@ -13,7 +13,7 @@
                         <h3 class="box-title">Harga Ikan Terkini</h3>
                     </div>
                     <div class="box-body">
-                        <center><canvas id="bar-chart" style="height: 300px;"></canvas></center>
+                        <center><canvas id="grafik_ikan" style="height: 300px;"></canvas></center>
                     </div>
                     <!-- /.box-body-->
                 </div>
@@ -25,34 +25,28 @@
                     <div class="box-body">
                         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                             <ol class="carousel-indicators">
-                                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                                <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
-                                <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
+                                <?php $count=0; ?>
+                                @foreach ($post_hot as $list)
+                                    <li data-target="#carousel-example-generic" data-slide-to="<?php echo $count;?>" class="<?php
+                                    if($count==0){echo "active";}?>"></li>
+                                    <?php $count++; ?>
+                                @endforeach
                             </ol>
                             <div class="carousel-inner">
-                                <div class="item active">
-                                    <img src="http://placehold.it/900x500/39CCCC/ffffff&text=I+Love+Bootstrap" alt="First slide">
+                                <?php $count=0;?>
+                                @foreach ($post_hot as $list)
+                                    <div class="item <?php if($count==0){echo "active";}?>">
+                                        <img src="<?php echo ($list->path_gambar);?>" alt="<?php echo ($list->judul);
+                                        ?>">
 
-                                    <div class="carousel-caption">
-                                        First Slide
+                                        <div class="carousel-caption">
+                                            <?php
+                                            echo ($list->judul);
+                                            $count++;
+                                            ?>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="item">
-                                    <img src="http://placehold.it/900x500/3c8dbc/ffffff&text=I+Love+Bootstrap" alt="Second slide">
-
-                                    <div class="carousel-caption">
-                                        Second Slide
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <img src="http://placehold.it/900x500/f39c12/ffffff&text=I+Love+Bootstrap" alt="Third slide">
-
-                                    <div class="carousel-caption">
-                                        Third Slide
-                                    </div>
-                                </div>
-                            </div>
-                            <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                                @endforeach                            <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
                                 <span class="fa fa-angle-left"></span>
                             </a>
                             <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
@@ -111,5 +105,91 @@
         </div>
         <!-- /.container -->
     </div>
- 
+
+<script src="{{asset("bower_components/AdminLTE/plugins/jQuery/jQuery-2.1.4.min.js")}}"></script>
+<script>
+    function setCookie(cname,cvalue,exdays) {
+        var d = new Date();
+        d.setTime(d.getTime() + (exdays*24*60*60*1000));
+        var expires = "expires=" + d.toGMTString();
+        document.cookie = cname+"="+cvalue+"; "+expires;
+    }
+
+    function getCookie(cname) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0; i<ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0)==' ') c = c.substring(1);
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+
+    celuk();
+    function celuk(){
+        window.onload = function () {
+            var ikan = getCookie("co_ikan");
+            var harga = getCookie("co_harga");
+            if (ikan == "" && harga == "") {
+                $.ajax({
+                    url: "http://localhost:8000/cek/harga",
+                    type: "GET",
+                    data: "",
+                    success: function (response) {
+                        harga = JSON.parse("[" + response + "]");
+                        console.log(harga);
+                        setCookie("co_harga", harga, 30);
+
+                    },
+                });
+                $.ajax({
+                    url: "http://localhost:8000/cek/ikan",
+                    type: "GET",
+                    data: "",
+                    success: function (response) {
+                        ikan = response.replace('["', '');
+                        ikan = ikan.replace('"]', '');
+                        ikan = ikan.split('","');
+                        console.log(ikan);
+                        setCookie("co_ikan", ikan, 30);
+                        location.reload();
+
+                    },
+                });
+
+
+            } else {
+                harga = JSON.parse("[" + harga + "]");
+                ikan = ikan.split(',');
+            }
+
+
+            var barChartData = {
+
+                labels: ikan,
+
+                datasets: [
+
+                    {
+                        fillColor: "rgba(91,192,222,0.5)",
+                        strokeColor: "rgba(91,192,222,0.8)",
+                        highlightFill: "rgba(91,192,222,0.75)",
+                        highlightStroke: "rgba(91,192,222,1)",
+                        data: harga
+                    }
+                ]
+
+            }
+            var ctx = document.getElementById("grafik_ikan").getContext("2d");
+            window.myBar = new Chart(ctx).Bar(barChartData, {
+                responsive: true
+            });
+        }
+    }
+
+</script>
+
 @endsection

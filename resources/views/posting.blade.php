@@ -25,6 +25,29 @@
                             <span class="description">Shared publicly - 7:30 PM today</span>
                         </div>
                         <!-- /.user-block -->
+
+                        <div class="row margin-bottom">
+                            <div class="col-sm-6">
+                                <img class="img-responsive" src="../../dist/img/photo1.png" alt="Photo">
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-6">
+                                <h4>Jenis Ikan</h4>
+                                <p>IKAN</p>
+                                <br>
+                                <br>
+                                <h4>Jenis Penjual</h4>
+                                <p>PJ</p>
+                                <br>
+                                <br>
+                                <h4>Harga/Kg</h4>
+                                <p>2000</p>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+
+                        <!-- Deskripsi -->
+                        <h4>Deskripsi<h4>
                         <p>
                             Lorem ipsum represents a long-held tradition for designers,
                             typographers and the like. Some people hate it and argue for
@@ -32,6 +55,15 @@
                             tools to help create filler text for everyone from bacon lovers
                             to Charlie Sheen fans.
                         </p>
+
+                        <!-- MAP -->
+                        <div class="row margin-bottom">
+                            <div class="col-sm-1">
+                            </div>
+                            <div class="col-sm-10" id="map" style="height: 300px">
+                            </div>
+                        </div>
+
                         <ul class="list-inline">
                             <li><a href="#" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i> Share</a></li>
                             <li><a href="#" class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i> Like</a>
@@ -51,4 +83,26 @@
     </div>
     <!-- /.container -->
 </div>
+<script>
+function initMap() {
+  var myLatLng = {lat: -7.279539, lng: 112.797268};
+
+  // Create a map object and specify the DOM element for display.
+  var map = new google.maps.Map(document.getElementById('map'), {
+    center: myLatLng,
+    scrollwheel: true,
+    zoom: 12
+  });
+
+  // Create a marker and set its position.
+  var marker = new google.maps.Marker({
+    map: map,
+    position: myLatLng,
+    title: 'Hello World!'
+  });
+}
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpWqBlfb-qpurvKDYC6jTifM7UfaOHvVA&signed_in=true&callback=initMap"
+        async defer>
+</script>
 @endsection

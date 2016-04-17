@@ -49,10 +49,11 @@
                                 @endforeach
                                     <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
                                 <span class="fa fa-angle-left"></span>
-                            </a>
-                            <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-                                <span class="fa fa-angle-right"></span>
-                            </a>
+                                </a>
+                                <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                                    <span class="fa fa-angle-right"></span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -79,9 +80,7 @@
                             </div>
 
                         @endforeach
-
-
-
+                    </div>
                 </div>
                 <!-- /.box -->
             </section>
@@ -120,7 +119,7 @@
             var harga = getCookie("co_harga");
             if (ikan == "" && harga == "") {
                 $.ajax({
-                    url: "http://localhost:8000/cek/harga",
+                    url: "<?php echo url('/')?>/cek/harga",
                     type: "GET",
                     data: "",
                     success: function (response) {
@@ -131,7 +130,7 @@
                     },
                 });
                 $.ajax({
-                    url: "http://localhost:8000/cek/ikan",
+                    url: "<?php echo url('/')?>/cek/ikan",
                     type: "GET",
                     data: "",
                     success: function (response) {

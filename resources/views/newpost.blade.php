@@ -19,7 +19,7 @@
                             <h3 class="box-title">Post Ikan Baru</h3>
                         </div><!-- /.box-header -->
                         <!-- form start -->
-                        <form role="form" method="POST" action="/submit_post">
+                        <form role="form" method="POST" action="/submit_post"  enctype='multipart/form-data'>
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="exampleInputjudul">Judul Post</label>
@@ -35,40 +35,47 @@
                                     <p class="help-block">Masukan Gambar Post</p>
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Kategori Ikan</label>
+                                    <label >Kategori Ikan</label>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
+                                            <input type="radio" name="inputkategori" id="optionsRadios1" value="tawar">
                                             Tawar
                                         </label>
                                     </div>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                                            <input type="radio" name="inputkategori" id="optionsRadios2" value="laut">
                                             Laut
                                         </label>
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Jenis Post</label>
+                                    <label >Jenis Post</label>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
+                                            <input type="radio" name="inputjenis" id="Radios1" value="produsen">
+                                            Produsen
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="inputjenis" id="Radios2" value="grosir">
                                             Grosir
                                         </label>
                                     </div>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                                            <input type="radio" name="inputjenis" id="Radios3" value="eceran">
                                             Eceran
                                         </label>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label>Provinsi</label>
-                                    <select class="form-control">
+                                    <select name="provinsi" class="form-control">
                                         <?php
                                             for($i=0;$i<34;$i++){
-                                                echo "<option>option $i</option>";
+                                                echo "<option value=".$i.">option $i</option>";
                                             }
                                         ?>
 
@@ -76,29 +83,29 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputjudul">Kota</label>
-                                    <input type="text" class="form-control" id="exampleInputjudul" placeholder="Surabaya">
+                                    <input name="kota" type="text" class="form-control" id="kota" placeholder="Surabaya">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputjudul">Langtitude & Longtitude</label>
                                     <div class="row">
                                         <div class="col-xs-6">
-                                            <input type="text" placeholder="13123213" disabled>
+                                            <input type="text" name="longtitude" value="13123213" placeholder="13123213">
                                         </div>
                                         <div class="col-xs-6">
-                                            <input type="text" placeholder="312312312" disabled>
+                                            <input type="text" name="latitude" value="13123213" placeholder="312312312">
                                         </div>
                                     </div>
 
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputjudul">Harga</label>
-                                    <input type="number" class="form-control" id="exampleInputjudul" placeholder="">
+                                    <input type="number" name="harga_kg" class="form-control" id="harga" placeholder="">
                                 </div>
-                            </div><!-- /.box-body -->
 
                             <div class="box-footer">
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
+                          </div>
                         </form>
                     </div><!-- /.box -->
                 </div>

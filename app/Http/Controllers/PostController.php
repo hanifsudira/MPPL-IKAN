@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use DB;
 use App\Http\Requests;
 
+
 class PostController extends Controller
 {
     /**

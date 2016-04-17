@@ -42,9 +42,15 @@ class PostController extends Controller
         return view('register2');
     }
     
-    public function posting()
+    public function posting($id)
     {
-        return view('posting');
+        $result=DB::select('call SP_ListPost(?)',array($id));
+        $data['listcomment']=DB::select('call SP_ListComment(?)',array($id));
+
+        foreach( $result as $list) {
+            $data['listpost']=$list;
+        }
+        return view('posting',$data);
     }
     
     public function newpost()

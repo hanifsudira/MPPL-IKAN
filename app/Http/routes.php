@@ -25,7 +25,7 @@ Route::group(['middleware' => ['web']], function () {
 
 Route::get('/register2', 'PostController@register');
 
-Route::get('/posting', 'PostController@posting');
+Route::get('/posting/{id}', 'PostController@posting');
 
 Route::get('/newpost', 'PostController@newpost');
 
@@ -51,7 +51,7 @@ Route::post('/submit_post', function(){
     $longtitude=$input['longtitude'];
     $latitude=$input['latitude'];
     $harga_kg=$input['harga_kg'];
-    $result = DB::select("call SP_NewPost(?,?,?,?,?,?,?,?,?,?)",array(1,$judul,$deskripsi,$jenis_ikan,$jenis_penjual,$provinsi,$kota,$longtitude,$latitude,$harga_kg));
+    $result = DB::select("call SP_NewPost(?,?,?,?,?,?,?,?,?,?)",array( Auth::user()->id_user,$judul,$deskripsi,$jenis_ikan,$jenis_penjual,$provinsi,$kota,$longtitude,$latitude,$harga_kg));
     foreach( $result as $list) {
         $id=$list->id_posting ;
     }

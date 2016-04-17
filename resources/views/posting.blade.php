@@ -6,7 +6,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Post . . .
+                <?php echo $listpost->judul; ?>
             </h1>
         </section>
 
@@ -17,31 +17,31 @@
                     <!-- Post -->
                     <div class="post">
                         <div class="user-block">
-                            <img class="img-circle img-bordered-sm" src="../../dist/img/user1-128x128.jpg" alt="user image">
+                            <img class="img-circle img-bordered-sm" src="<?php echo $listpost->path_foto; ?>" alt="user image">
                             <span class="username">
-                              <a href="#">Jonathan Burke Jr.</a>
+                              <a href="#"><?php echo $listpost->fullname; ?></a>
                               <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
                             </span>
-                            <span class="description">Shared publicly - 7:30 PM today</span>
+                            <span class="description">Shared publicly - <?php echo $listpost->waktu; ?></span>
                         </div>
                         <!-- /.user-block -->
 
                         <div class="row margin-bottom">
                             <div class="col-sm-6">
-                                <img class="img-responsive" src="../../dist/img/photo1.png" alt="Photo">
+                                <img class="img-responsive" src="<?php echo $listpost->path_gambar; ?>" alt="Photo">
                             </div>
                             <!-- /.col -->
                             <div class="col-sm-6">
                                 <h4>Jenis Ikan</h4>
-                                <p>IKAN</p>
+                                <p><?php echo $listpost->jenis_ikan; ?></p>
                                 <br>
                                 <br>
                                 <h4>Jenis Penjual</h4>
-                                <p>PJ</p>
+                                <p><?php echo $listpost->jenis_penjual; ?></p>
                                 <br>
                                 <br>
                                 <h4>Harga/Kg</h4>
-                                <p>2000</p>
+                                <p><?php echo $listpost->harga_kg; ?></p>
                             </div>
                             <!-- /.col -->
                         </div>
@@ -49,11 +49,7 @@
                         <!-- Deskripsi -->
                         <h4>Deskripsi<h4>
                         <p>
-                            Lorem ipsum represents a long-held tradition for designers,
-                            typographers and the like. Some people hate it and argue for
-                            its demise, but others ignore the hate as they create awesome
-                            tools to help create filler text for everyone from bacon lovers
-                            to Charlie Sheen fans.
+                            <?php echo $listpost->deskripsi; ?>
                         </p>
 
                         <!-- MAP -->
@@ -72,8 +68,35 @@
                                 <a href="#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> Comments
                                     (5)</a></li>
                         </ul>
+                                <div class="box-footer box-comments">
+                                    @foreach ($listcomment as $list)
+                                    <div class="box-comment">
+                                        <!-- User image -->
+                                        <img class="img-circle img-sm" src="<?php echo $list->path_foto; ?>" alt="User Image">
 
-                        <input class="form-control input-sm" type="text" placeholder="Type a comment">
+                                        <div class="comment-text">
+                                  <span class="username">
+                                    <?php echo $list->fullname; ?>
+                                    <span class="text-muted pull-right"><?php echo $list->waktu; ?></span>
+                                  </span><!-- /.username -->
+                                            <?php echo $list->komentar; ?>
+                                        </div>
+                                        <!-- /.comment-text -->
+                                    </div>
+                                    <!-- /.box-comment -->
+                                    @endforeach
+                                </div>
+
+                                <div class="box-footer">
+                                    <form action="#" method="post">
+                                        <img class="img-responsive img-circle img-sm" src="{{ Auth::user()->path_gambar }}" alt="Alt Text">
+                                        <!-- .img-push is used to add margin to elements next to floating images -->
+                                        <div class="img-push">
+                                            <input type="text" class="form-control input-sm" placeholder="Press enter to post comment">
+                                        </div>
+                                    </form>
+                                </div>
+
                     </div>
                     <!-- /.post -->
                 </div>
@@ -85,7 +108,10 @@
 </div>
 <script>
 function initMap() {
-  var myLatLng = {lat: -7.279539, lng: 112.797268};
+   <?php echo "var latt = $listpost->latitude " ?>;
+    <?php echo "var long = $listpost->longtitude " ?>;
+
+    var myLatLng = {lat:latt , lng: long};
 
   // Create a map object and specify the DOM element for display.
   var map = new google.maps.Map(document.getElementById('map'), {
@@ -98,7 +124,7 @@ function initMap() {
   var marker = new google.maps.Marker({
     map: map,
     position: myLatLng,
-    title: 'Hello World!'
+    title: 'Tempatnya'
   });
 }
 </script>

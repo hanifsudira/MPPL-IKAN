@@ -65,14 +65,38 @@
                     <div class="box-body">
                         @foreach ($post_newer as $list)
                             <div class="post">
+                                <!-- ATAS -->
                                 <div class="user-block">
                                     <img class="img-circle img-bordered-sm" src="<?php echo ($list->path_foto);?>" alt="<?php echo ($list->username);?> image">
-                            <span class='username'>
-                              <a href="#"><?php echo ($list->fullname);?></a>
-                            </span>
+                                    <span class='username'>
+                                      <a href="#"><?php echo ($list->fullname);?></a>
+                                    </span>
                                     <span class='description'>Shared publicly - <?php echo ($list->waktu);?></span>
                                 </div>
                                 <h4><a href="#"><?php echo ($list->judul);?></a></h4>
+
+                                <!-- TENGAH -->
+                                <div class="row margin-bottom">
+                                    <div class="col-sm-6">
+                                        <img class="img-responsive" src="<?php echo ($list->path_gambar);?>" alt="Photo">
+                                    </div>
+                                    <!-- /.col -->
+                                    <div class="col-sm-6">
+                                        <h4>Jenis Ikan</h4>
+                                        <p><?php echo ($list->jenis_ikan);?></p>
+                                        <br>
+                                        <br>
+                                        <h4>Jenis Penjual</h4>
+                                        <p><?php echo ($list->jenis_penjual);?></p>
+                                        <br>
+                                        <br>
+                                        <h4>Harga/Kg</h4>
+                                        <p><?php echo ($list->harga_kg);?></p>
+                                    </div>
+                                    <!-- /.col -->
+                                </div>
+
+                                <h4>Deskripsi<h4>
                                 <p>
                                     <?php echo ($list->deskripsi);?>
                                 </p>

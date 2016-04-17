@@ -19,22 +19,7 @@
     <link rel="stylesheet" href="{{asset("bower_components/AdminLTE/dist/css/skins/_all-skins.min.css")}}">
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="{{asset("bower_components/AdminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css")}}">
-    <style>
-        .content-wrapper{
-            margin-top: 50px;
-        }
-        #scrollup {
-            width: 48px;
-            height: 48px;
-            background: url(https://cdn3.iconfinder.com/data/icons/iconic-1/32/arrow_up_alt1-48.png) 0 0 no-repeat;
-            text-indent: -9999px;
-            display: none;
-            background-color: #eee;
-            position: fixed;
-            bottom: 48px;
-            right: 48px;
-        }
-    </style>
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -48,7 +33,7 @@
 
     <header class="main-header">
     
-        <nav class="navbar navbar-fixed-top" role="navigation">
+        <nav class="navbar navbar-static-top" role="navigation">
             <div class="container">
                 <div class="navbar-header">
                     <a href="#" class="navbar-brand">Lapak<b>Ikan</b></a>
@@ -58,16 +43,18 @@
                 </div>
 
                 <!-- Pencarian -->
-                <div class="collapse navbar-collapse pull-left" >
-                    <form class="navbar-form ">
+                <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+                    <form class="navbar-form navbar-left" role="search">
+                        <button type="button" style="height: 34px" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Kategori
+                            <span class="fa fa-caret-down"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Laut</a></li>
+                            <li><a href="#">Tawar</a></li>
+                        </ul>
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Cari">
-                            <button type="button" class="btn btn-flat dropdown-toggle" data-toggle="dropdown">Kategori <span class="fa fa-caret-down"></span></button>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Tawar</a></li>
-                                <li><a href="#">Laut</a></li>
-                            </ul>
-                            <button type="button" style="height: 34px" class="btn btn-flat">Cari</button>
+                            <input type="text" class="form-control" id="navbar-search-input" placeholder="Cari">
+                            <button type="button" style="height: 34px" class="btn btn-info btn-flat">Cari</button>
                         </div>
                     </form>
                 </div>
@@ -101,7 +88,7 @@
                                         <p>Sudah punya akun?</p>
                                       </div>
                                       <div class="col-xs-4 text-center">
-                                        <a href="{{ action("Auth\AuthController@login") }}" class="btn btn-default btn-flat">Login</a>
+                                        <a href="{{ action("PostController@login") }}" class="btn btn-default btn-flat">Login</a>
                                       </div>
                                     </div>
                                     <!-- /.row -->
@@ -114,7 +101,7 @@
                                       <p>Belum punya akun?</p>
                                     </div>
                                     <div class="col-xs-4 text-center">
-                                      <a href="{{ action("Auth\AuthController@register") }}" class="btn btn-default btn-flat">Register</a>
+                                      <a href="{{ action("PostController@register") }}" class="btn btn-default btn-flat">Register</a>
                                     </div>
                                   </li>
                                 </ul>
@@ -202,7 +189,6 @@
         </div>
         <!-- /.container -->
     </footer>
-    <a href="#" id="scrollup">Scroll</a>
 </div>
 
 <!-- jQuery 2.1.4 -->
@@ -222,26 +208,39 @@
 <!-- CK Editor -->
 <script src="https://cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
 
+
 <script>
-    $(document).ready(function(){
-
-        $(window).scroll(function(){
-            if ($(this).scrollTop() > 100) {
-                $('#scrollup').fadeIn();
-            } else {
-                $('#scrollup').fadeOut();
-            }
-        });
-
-        $('#scrollup').click(function(){
-            $("html, body").animate({ scrollTop: 0 }, 400);
-            return false;
-        });
-
+    $(function () {
+        // Replace the <textarea id="editor1"> with a CKEditor
+        // instance, using default configuration.
+        CKEDITOR.replace('editor1');
+        //bootstrap WYSIHTML5 - text editor
+        $(".textarea").wysihtml5();
     });
 
+    var data = {
+        labels: ["January", "February", "March", "April", "May", "June", "July"],
+        datasets: [
+            {
+                label: "My First dataset",
+                fillColor: "rgba(220,220,220,0.5)",
+                strokeColor: "rgba(220,220,220,0.8)",
+                highlightFill: "rgba(220,220,220,0.75)",
+                highlightStroke: "rgba(220,220,220,1)",
+                data: [65, 59, 80, 81, 56, 55, 40]
+            },
+            {
+                label: "My Second dataset",
+                fillColor: "rgba(151,187,205,0.5)",
+                strokeColor: "rgba(151,187,205,0.8)",
+                highlightFill: "rgba(151,187,205,0.75)",
+                highlightStroke: "rgba(151,187,205,1)",
+                data: [28, 48, 40, 19, 86, 27, 90]
+            }
+        ]
+    };
+    var context = document.getElementById('bar-chart').getContext('2d');
+    var clientsChart = new Chart(context).Bar(data);
 </script>
-
 </body>
-
 </html>

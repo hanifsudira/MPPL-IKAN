@@ -33,6 +33,11 @@ Route::get('/editprofile', 'HomeController@editprofile');
 
 Route::get('/cek/{id}', 'PostController@cek');
 
+Route::post('/submit_post', function(){
+
+
+});
+
 Route::auth();
 
 Route::get('/home', 'HomeController@index');

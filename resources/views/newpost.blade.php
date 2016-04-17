@@ -19,19 +19,19 @@
                             <h3 class="box-title">Post Ikan Baru</h3>
                         </div><!-- /.box-header -->
                         <!-- form start -->
-                        <form role="form">
+                        <form role="form" method="POST" action="/submit_post">
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="exampleInputjudul">Judul Post</label>
-                                    <input type="text" class="form-control" id="exampleInputjudul" placeholder="">
+                                    <input type="text" name="judul" class="form-control" id="exampleInputjudul" placeholder="">
                                 </div>
                                 <div class="form-group">
                                     <label>Deskripsi</label>
-                                    <textarea class="form-control" rows="3" style="resize: vertical;" placeholder="Enter ..."></textarea>
+                                    <textarea class="form-control" name="deskripsi" rows="3" style="resize: vertical;" placeholder="Enter ..."></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputFile">Input Gambar</label>
-                                    <input type="file" id="exampleInputFile">
+                                    <input name="gambar" type="file" id="exampleInputFile">
                                     <p class="help-block">Masukan Gambar Post</p>
                                 </div>
                                 <div class="form-group">

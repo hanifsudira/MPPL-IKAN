@@ -23,6 +23,17 @@
         .content-wrapper{
             margin-top: 50px;
         }
+        #scrollup {
+            width: 48px;
+            height: 48px;
+            background: url(https://cdn3.iconfinder.com/data/icons/iconic-1/32/arrow_up_alt1-48.png) 0 0 no-repeat;
+            text-indent: -9999px;
+            display: none;
+            background-color: #eee;
+            position: fixed;
+            bottom: 48px;
+            right: 48px;
+        }
     </style>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -191,6 +202,7 @@
         </div>
         <!-- /.container -->
     </footer>
+    <a href="#" id="scrollup">Scroll</a>
 </div>
 
 <!-- jQuery 2.1.4 -->
@@ -210,6 +222,25 @@
 <!-- CK Editor -->
 <script src="https://cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
 
+<script>
+    $(document).ready(function(){
+
+        $(window).scroll(function(){
+            if ($(this).scrollTop() > 100) {
+                $('#scrollup').fadeIn();
+            } else {
+                $('#scrollup').fadeOut();
+            }
+        });
+
+        $('#scrollup').click(function(){
+            $("html, body").animate({ scrollTop: 0 }, 400);
+            return false;
+        });
+
+    });
+
+</script>
 
 </body>
 

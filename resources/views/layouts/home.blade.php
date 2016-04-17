@@ -211,6 +211,16 @@
 <!-- CK Editor -->
 <script src="https://cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
 
+<script src="{{asset("bower_components/AdminLTE/plugins/datepicker/bootstrap-datepicker.js")}}"></script>
+    <script>
+      $(function () {
+        //Date picker
+        $('#datepicker').datepicker({
+          autoclose: true
+        });
+      });
+    </script>
+
 
 </body>
 </html>

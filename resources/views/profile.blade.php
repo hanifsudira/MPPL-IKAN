@@ -67,8 +67,14 @@
                       <hr>
 
                       <strong><i class="fa fa-star margin-r-5"></i> Rating</strong>
+                      <br>
 
-                      <p>Rating</p>
+                      <!-- <p>Rating</p> -->
+                      <i class="fa fa-star margin-r-5"></i>
+                      <i class="fa fa-star margin-r-5"></i>
+                      <i class="fa fa-star margin-r-5"></i>
+                      <i class="fa fa-star-o margin-r-5"></i>
+                      <i class="fa fa-star-o margin-r-5"></i>
                     </div>
                     <!-- /.box-body -->
                   </div>
@@ -220,7 +226,7 @@
                             <label for="inputName" class="col-sm-2 control-label">Nama Lengkap</label>
 
                             <div class="col-sm-10">
-                              <input type="email" class="form-control" id="inputName" placeholder="Nama Lengkap">
+                              <input type="text" class="form-control" id="inputName" placeholder="Nama Lengkap">
                             </div>
                           </div>
                           <div class="form-group">
@@ -228,6 +234,31 @@
 
                             <div class="col-sm-10">
                               <input type="text" class="form-control" id="inputName" placeholder="Kontak">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="inputName" class="col-sm-2 control-label">Tempat Lahir</label>
+
+                            <div class="col-sm-10">
+                              <input type="text" class="form-control" id="inputName" placeholder="Tempat Lahir">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="inputName" class="col-sm-2 control-label">Tanggal Lahir</label>
+
+                            <div class="col-sm-10">
+                              <input type="text" class="form-control" id="datepicker" placeholder="dd/mm/yyyy">
+                            </div>
+                          </div>
+                          <!-- select -->
+                          <div class="form-group">
+                              <label class="col-sm-2 control-label">Gender</label>
+                              <div class="col-sm-10">
+                              <select class="col-sm-2 control-label">
+                                <option>Kosong</option>
+                                <option>Laki-laki</option>
+                                <option>Perempuan</option>
+                              </select>
                             </div>
                           </div>
                           <div class="form-group">
@@ -292,4 +323,5 @@
         </div>
         <!-- /.container -->
     </div>
+
 @endsection

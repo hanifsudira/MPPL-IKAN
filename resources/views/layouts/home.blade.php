@@ -58,7 +58,10 @@
                         </div>
                     </form>
                 </div>
-
+                <?php  
+                // {{{ isset(Auth::user()->username) ? Auth::user()->name : Auth::user()->email }}}
+                ?>
+                
                 <!-- Login -->
                 <div class="navbar-custom-menu">
                   <!-- Right Side Of Navbar -->

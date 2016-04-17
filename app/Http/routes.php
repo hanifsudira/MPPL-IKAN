@@ -17,6 +17,11 @@ Route::get('/', 'PostController@index');
 Route::get('/home2', 'PostController@index');
 
 Route::get('/login2', 'PostController@login');
+Route::group(['middleware' => ['web']], function () {
+    Route::get('/login2', 'PostController@login');
+    Route::get('/register2', 'PostController@register');
+    // your routes here
+});
 
 Route::get('/register2', 'PostController@register');
 

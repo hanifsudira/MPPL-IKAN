@@ -58,7 +58,8 @@ Route::post('/submit_post', function(){
         $gambar->move(
             base_path() . '/public/image/news/', $imageName
         );
-        DB::insert("call SP_InputPicture(?,?,?)", array($id, 1, "$imageName"));
+        DB::insert("call SP_InputPicture(?,?,?)", array($id, 1, "/image/news/$imageName"));
+        return redirect('posting');
     }
 });
 

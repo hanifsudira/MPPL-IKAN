@@ -23,22 +23,22 @@
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="exampleInputjudul">Judul Post</label>
-                                    <input type="text" name="judul" class="form-control" id="exampleInputjudul" placeholder="">
+                                    <input type="text" name="judul" class="form-control" id="exampleInputjudul" placeholder="" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Deskripsi</label>
-                                    <textarea class="form-control" name="deskripsi" rows="3" style="resize: vertical;" placeholder="Enter ..."></textarea>
+                                    <textarea class="form-control" name="deskripsi" rows="3" style="resize: vertical;" placeholder="Enter ..." required></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputFile">Input Gambar</label>
-                                    <input name="gambar" type="file" id="exampleInputFile">
+                                    <input name="gambar" type="file" id="exampleInputFile" required>
                                     <p class="help-block">Masukan Gambar Post</p>
                                 </div>
                                 <div class="form-group">
                                     <label >Kategori Ikan</label>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="inputkategori" id="optionsRadios1" value="tawar">
+                                            <input type="radio" name="inputkategori" id="optionsRadios1" value="tawar" checked>
                                             Tawar
                                         </label>
                                     </div>
@@ -53,7 +53,7 @@
                                     <label >Jenis Post</label>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="inputjenis" id="Radios1" value="produsen">
+                                            <input type="radio" name="inputjenis" id="Radios1" value="produsen" checked>
                                             Produsen
                                         </label>
                                     </div>
@@ -71,36 +71,39 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>Provinsi</label>
-                                    <select name="provinsi" class="form-control">
-                                        <?php
-                                            for($i=0;$i<34;$i++){
-                                                echo "<option value=".$i.">option $i</option>";
-                                            }
-                                        ?>
-
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputjudul">Kota</label>
-                                    <input name="kota" type="text" class="form-control" id="kota" placeholder="Surabaya">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputjudul">Langtitude & Longtitude</label>
-                                    <div class="row">
-                                        <div class="col-xs-6">
-                                            <input type="text" name="longtitude" value="13123213" placeholder="13123213">
-                                        </div>
-                                        <div class="col-xs-6">
-                                            <input type="text" name="latitude" value="13123213" placeholder="312312312">
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="form-group">
                                     <label for="exampleInputjudul">Harga</label>
-                                    <input type="number" name="harga_kg" class="form-control" id="harga" placeholder="">
+                                    <input type="number" name="harga_kg" class="form-control" id="harga" placeholder="" required>
                                 </div>
+
+
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <label >Provinsi</label>
+                                            <input type="text" id="provinsi" name="provinsi" required>
+                                        </div>
+                                        <div class="col-xs-3">
+                                            <label >Kota</label>
+                                            <input type="text" id="kota" name="kota" required>
+                                        </div>
+                                        <div class="col-xs-3">
+                                            <label >Longtitude</label>
+                                            <input type="text" id="long" name="longtitude" required>
+                                        </div>
+                                        <div class="col-xs-3">
+                                            <label >Latitude</label>
+                                            <input type="text" id="lat" name="latitude" required>
+                                        </div>
+
+                                    </div>
+                                    <br>
+                                    <center>
+                                            <div id="dvMap" style="width:600px; height: 400px">
+                                            </div>
+                                    </center>
+
+                                </div>
+
 
                             <div class="box-footer">
                                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -117,5 +120,54 @@
     </div>
     <!-- /.container -->
 </div>
+
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript">
+    var lat=0.0;
+    var long=0.0;
+    window.onload = function () {
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        }
+        function showPosition(position) {
+            lat=position.coords.latitude;
+            console.log(lat);
+            long=position.coords.longitude;
+            console.log(long);
+            out_map();
+        }
+
+    }
+
+    function out_map(){
+        var mapOptions = {
+            center: new google.maps.LatLng(lat, long),
+            zoom: 14,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var infoWindow = new google.maps.InfoWindow();
+        var latlngbounds = new google.maps.LatLngBounds();
+        var map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
+        google.maps.event.addListener(map, 'click', function (e) {
+            var latlng = new google.maps.LatLng(e.latLng.lat(), e.latLng.lng());
+            var geocoder = geocoder = new google.maps.Geocoder();
+            geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    if (results[1]) {
+                        var address_ = results[1].formatted_address.split(",");
+                        var len=address_.length;
+                        document.getElementById("provinsi").value = address_[len-2];
+                        document.getElementById("kota").value = address_[len-3];
+                        document.getElementById("lat").value = e.latLng.lat();
+                        document.getElementById("long").value = e.latLng.lng();
+                    }
+                }
+
+            });
+        });
+    }
+</script>
+
 
 @endsection

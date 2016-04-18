@@ -36,14 +36,13 @@
                                 <?php $count=0;?>
                                 @foreach ($post_hot as $list)
                                     <div class="item <?php if($count==0){echo "active";}?>">
-                                        <img src="<?php echo ($list->path_gambar);?>" alt="<?php echo ($list->judul);
-                                        ?>">
+                                        <img src="<?php echo url('/'); echo ($list->path_gambar);?>" alt="<?php echo ($list->judul);?>">
 
                                         <div class="carousel-caption">
-                                            <?php
+                                            <a href="<?php echo url('/');echo "/posting/$list->id_posting"; ?>"><?php
                                             echo ($list->judul);
                                             $count++;
-                                            ?>
+                                            ?></a>
                                         </div>
                                     </div>
                                 @endforeach
@@ -73,7 +72,7 @@
                                     </span>
                                     <span class='description'>Shared publicly - <?php echo ($list->waktu);?></span>
                                 </div>
-                                <h4><a href="#"><?php echo ($list->judul);?></a></h4>
+                                <h4><a href="<?php echo url('/');echo "/posting/$list->id_posting"; ?>"><?php echo ($list->judul);?></a></h4>
 
                                 <!-- TENGAH -->
                                 <div class="row margin-bottom">
@@ -100,7 +99,7 @@
                                 <p>
                                     <?php echo ($list->deskripsi);?>
                                 </p>
-                                <a class="btn btn-primary btn-xs">Read more</a>
+                                <a href="<?php echo url('/');echo "/posting/$list->id_posting";?>" class="btn btn-primary btn-xs">Read more</a>
                             </div>
 
                         @endforeach

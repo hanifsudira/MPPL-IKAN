@@ -19,7 +19,7 @@
                             <h3 class="box-title">Post Ikan Baru</h3>
                         </div><!-- /.box-header -->
                         <!-- form start -->
-                        <form role="form" method="POST" action="/submit_post"  enctype='multipart/form-data'>
+                        <form role="form" method="POST" action="{{url('/')}}/submit_post"  enctype='multipart/form-data'>
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="exampleInputjudul">Judul Post</label>

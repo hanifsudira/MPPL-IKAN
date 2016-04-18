@@ -37,7 +37,7 @@
         <nav class="navbar navbar-static-top" role="navigation">
             <div class="container">
                 <div class="navbar-header">
-                    <a href="#" class="navbar-brand">Lapak<b>Ikan</b></a>
+                    <a href="{{url("/")}}" class="navbar-brand">Lapak<b>Ikan</b></a>
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
                         <i class="fa fa-bars"></i>
                     </button>
@@ -46,13 +46,33 @@
                 <!-- Pencarian -->
                 <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                     <form class="navbar-form navbar-left" role="search">
-                        <button type="button" style="height: 34px" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Kategori
-                            <span class="fa fa-caret-down"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Laut</a></li>
-                            <li><a href="#">Tawar</a></li>
-                        </ul>
+                        <div class="form-group">
+                          <div class="radio">
+                            <label>
+                              <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                              Grosir
+                            </label>
+                          </div>
+                          <div class="radio">
+                            <label>
+                              <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                              Eceran
+                            </label>
+                          </div>
+                          <div class="radio">
+                            <label>
+                              <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">
+                              Kulakan
+                            </label>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <select class="form-control">
+                            <option>Jenis Ikan</option>
+                            <option>Laut</option>
+                            <option>Tawar</option>
+                          </select>
+                        </div>
                         <div class="form-group">
                             <input type="text" class="form-control" id="navbar-search-input" placeholder="Cari">
                             <button type="button" style="height: 34px" class="btn btn-info btn-flat">Cari</button>
@@ -118,6 +138,7 @@
                         <div class="navbar-custom-menu">
                             <ul class="nav navbar-nav">
                               <!-- User Account: style can be found in dropdown.less -->
+                              <li><a href="{{url("/")}}/newpost">New Post</a></li>
                               <li class="dropdown user user-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                   <span class="hidden-xs">{{ Auth::user()->username }}</span>

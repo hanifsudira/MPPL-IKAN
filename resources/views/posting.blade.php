@@ -28,7 +28,7 @@
 
                         <div class="row margin-bottom">
                             <div class="col-sm-6">
-                                <img class="img-responsive" src="<?php echo $listpost->path_gambar; ?>" alt="Photo">
+                                <img class="img-responsive" src="{{url("/")}}<?php echo $listpost->path_gambar;?>" alt="Photo">
                             </div>
                             <!-- /.col -->
                             <div class="col-sm-6">

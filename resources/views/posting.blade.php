@@ -89,7 +89,7 @@
 
                                 <div class="box-footer">
                                     <form action="#" method="post">
-                                        <img class="img-responsive img-circle img-sm" src="{{ Auth::user()->path_gambar }}" alt="Alt Text">
+                                        <img class="img-responsive img-circle img-sm" src="<?php if(Auth::check()!=false){echo Auth::user()->path_gambar;} ?>" alt="Alt Text">
                                         <!-- .img-push is used to add margin to elements next to floating images -->
                                         <div class="img-push">
                                             <input type="text" class="form-control input-sm" placeholder="Press enter to post comment">

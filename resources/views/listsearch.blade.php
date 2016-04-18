@@ -27,7 +27,7 @@
                             </span>
                                     <span class='description'>Shared publicly - <?php echo ($list->waktu);?></span>
                                 </div>
-                                <h4><a href="#"><?php echo ($list->judul);?></a></h4>
+                                <h4><a href="<?php echo url('/');echo "/posting/$list->id_posting";?>"><?php echo ($list->judul);?></a></h4>
                                 <p>
                                     <?php echo ($list->deskripsi);?>
                                 </p>

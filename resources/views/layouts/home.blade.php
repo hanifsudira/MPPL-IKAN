@@ -45,37 +45,37 @@
 
                 <!-- Pencarian -->
                 <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
-                    <form class="navbar-form navbar-left" role="search">
+                    <form role="form" method="POST" action="{{url('/')}}/listsearch"  class="navbar-form navbar-left" role="search">
                         <div class="form-group">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="jenis_penjual" id="optionsRadios3" value="produsen" checked>
+                                    Produsen
+                                </label>
+                            </div>
                           <div class="radio">
                             <label>
-                              <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                              <input type="radio" name="jenis_penjual" id="optionsRadios1" value="grosir" >
                               Grosir
                             </label>
                           </div>
                           <div class="radio">
                             <label>
-                              <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                              <input type="radio" name="jenis_penjual" id="optionsRadios2" value="eceran">
                               Eceran
                             </label>
                           </div>
-                          <div class="radio">
-                            <label>
-                              <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">
-                              Kulakan
-                            </label>
-                          </div>
                         </div>
                         <div class="form-group">
-                          <select class="form-control">
-                            <option>Jenis Ikan</option>
-                            <option>Laut</option>
-                            <option>Tawar</option>
+                          <select name="jenis_ikan" class="form-control">
+                            <option value="0">Jenis Ikan</option>
+                            <option value="laut">Laut</option>
+                            <option value="tawar">Tawar</option>
                           </select>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="navbar-search-input" placeholder="Cari">
-                            <button type="button" style="height: 34px" class="btn btn-info btn-flat">Cari</button>
+                            <input type="text" name="keyword" class="form-control" id="navbar-search-input" placeholder="Cari">
+                            <button type="submit" style="height: 34px" class="btn btn-info btn-flat">Cari</button>
                         </div>
                     </form>
                 </div>

@@ -31,7 +31,7 @@ Route::get('/newpost', 'PostController@newpost');
 
 Route::get('/editpost', 'PostController@editpost');
 
-Route::get('/listsearch', 'PostController@listsearch');
+Route::post('/listsearch', 'PostController@listsearch');
 
 Route::get('/profile', 'HomeController@profile');
 
@@ -39,34 +39,9 @@ Route::get('/editprofile', 'HomeController@editprofile');
 
 Route::get('/cek/{id}', 'PostController@cek');
 
-Route::post('/submit_post', function(){
-    $input = Request::all();
+Route::post('/submit_post', 'HomeController@submit');
 
-    $judul=$input['judul'];
-    $deskripsi=$input['deskripsi'];
-    $jenis_ikan=$input['inputkategori'];
-    $jenis_penjual=$input['inputjenis'];
-    $provinsi=$input['provinsi'];
-    $kota=$input['kota'];
-    $longtitude=$input['longtitude'];
-    $latitude=$input['latitude'];
-    $harga_kg=$input['harga_kg'];
-    $result = DB::select("call SP_NewPost(?,?,?,?,?,?,?,?,?,?)",array( Auth::user()->id_user,$judul,$deskripsi,$jenis_ikan,$jenis_penjual,$provinsi,$kota,$longtitude,$latitude,$harga_kg));
-    foreach( $result as $list) {
-        $id=$list->id_posting ;
-    }
-    if(Input::hasFile('gambar')) {
-        $gambar=Input::file('gambar');
-        $imageName = $id . '.' .
-            $gambar->getClientOriginalExtension();
 
-        $gambar->move(
-            base_path() . '/public/image/news/', $imageName
-        );
-        DB::insert("call SP_InputPicture(?,?,?)", array($id, 1, "/image/news/$imageName"));
-        return redirect('posting');
-    }
-});
 
 Route::auth();
 

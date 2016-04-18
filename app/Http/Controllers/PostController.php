@@ -63,10 +63,14 @@ class PostController extends Controller
         return view('editpost');
     }
 
-    public function listsearch()
+    public function listsearch(Request $request)
     {
-        $data['post_list']=DB::select('call SP_Find("tes","tawar","grosir")');
-        $data['pencarian']="tes";
+        $input = $request->all();
+        $jenis_ikan=$input['jenis_ikan'];
+        $jenis_penjual=$input['jenis_penjual'];
+        $keyword=$input['keyword'];
+        $data['post_list']= DB::select("call SP_Find(?,?,?)",array($keyword,$jenis_ikan,$jenis_penjual));
+        $data['pencarian']=$keyword;
         return view('listsearch',$data);
     }
 

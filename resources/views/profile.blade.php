@@ -84,10 +84,10 @@
                 <div class="col-md-9">
                   <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs">
-                      <li class="active"><a href="#activity" data-toggle="tab">Activity</a></li>
+                      <li class="active"><a href="#activity" data-toggle="tab">History Post</a></li>
                       <li><a href="#timeline" data-toggle="tab">Timeline</a></li>
-                      <li><a href="#settings" data-toggle="tab">Settings</a></li>
-                      <li><a href="#moresettings" data-toggle="tab">More Settings</a></li>
+                      <li><a href="#settings" data-toggle="tab">Edit Akun</a></li>
+                      <li><a href="#moresettings" data-toggle="tab">Ganti Password</a></li>
                     </ul>
                     <div class="tab-content">
                       <div class="active tab-pane" id="activity">

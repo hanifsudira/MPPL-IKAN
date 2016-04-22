@@ -29,7 +29,7 @@ Route::get('/posting/{id}', 'PostController@posting');
 
 Route::get('/newpost', 'PostController@newpost');
 
-Route::get('/editpost', 'PostController@editpost');
+Route::get('/editpost/{id}', 'PostController@editpost');
 
 Route::post('/listsearch', 'PostController@listsearch');
 
@@ -40,6 +40,8 @@ Route::get('/editprofile', 'HomeController@editprofile');
 Route::get('/cek/{id}', 'PostController@cek');
 
 Route::post('/submit_post', 'HomeController@submit');
+
+Route::post('/edit_post', 'HomeController@edit');
 
 Route::post('/submit_comment', 'HomeController@submitcomment');
 

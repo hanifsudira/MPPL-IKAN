@@ -50,7 +50,7 @@ class HomeController extends Controller
         $longtitude=$input['longtitude'];
         $latitude=$input['latitude'];
         $harga_kg=$input['harga_kg'];
-        $result = DB::select("call SP_NewPost(?,?,?,?,?,?,?,?,?,?)",array(1,$judul,$deskripsi,$jenis_ikan,$jenis_penjual,$provinsi,$kota,$longtitude,$latitude,$harga_kg));
+        $result = DB::select("call SP_NewPost(?,?,?,?,?,?,?,?,?)",array($judul,$deskripsi,$jenis_ikan,$jenis_penjual,$provinsi,$kota,$longtitude,$latitude,$harga_kg));
         foreach( $result as $list) {
             $id=$list->id_posting ;
         }
@@ -66,6 +66,35 @@ class HomeController extends Controller
             return redirect("posting/$id");
         }
     }
+    public function edit (Request $request){
+        $input = $request->all();
+        
+        $id=$input['id'];
+        $judul=$input['judul'];
+        $deskripsi=$input['deskripsi'];
+        $jenis_ikan=$input['inputkategori'];
+        $jenis_penjual=$input['inputjenis'];
+        $provinsi=$input['provinsi'];
+        $kota=$input['kota'];
+        $longtitude=$input['longtitude'];
+        $latitude=$input['latitude'];
+        $harga_kg=$input['harga_kg'];
+        DB::update("call SP_EditPost(?,?,?,?,?,?,?,?,?,?)",array($id,$judul,$deskripsi,$jenis_ikan,$jenis_penjual,$provinsi,$kota,$longtitude,$latitude,$harga_kg));
+
+        if(Input::hasFile('gambar')) {
+            $gambar=Input::file('gambar');
+            $imageName = $id . '.' .
+                $gambar->getClientOriginalExtension();
+
+            $gambar->move(
+                base_path() . '/public/image/news/', $imageName
+            );
+            DB::insert("call SP_InputPicture(?,?,?)", array($id, 1, "/image/news/$imageName"));
+        }
+        return redirect("posting/$id");
+
+    }
+
     public function submitcomment (Request $request){
         $input = $request->all();
 

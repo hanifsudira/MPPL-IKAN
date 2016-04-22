@@ -19,32 +19,33 @@
                             <h3 class="box-title">Edit Post Ikan </h3>
                         </div><!-- /.box-header -->
                         <!-- form start -->
-                        <form role="form" method="POST" action="{{url('/')}}/submit_post"  enctype='multipart/form-data'>
+                        <form role="form" method="POST" action="{{url('/')}}/edit_post"  enctype='multipart/form-data'>
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="exampleInputjudul">Judul Post</label>
-                                    <input type="text" name="judul" class="form-control" id="exampleInputjudul" placeholder="" required>
+                                    <input type="text" name="judul" class="form-control" id="exampleInputjudul" value="<?php echo $listpost->judul; ?>" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Deskripsi</label>
-                                    <textarea class="form-control" name="deskripsi" rows="3" style="resize: vertical;" placeholder="Enter ..." required></textarea>
+                                    <textarea class="form-control" name="deskripsi" rows="3" style="resize: vertical;" required><?php echo $listpost->deskripsi; ?></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputFile">Input Gambar</label>
-                                    <input name="gambar" type="file" id="exampleInputFile" required>
+                                    <img class="img-responsive" src="{{url("/")}}<?php echo $listpost->path_gambar;?>" alt="Photo">
+                                    <input name="gambar" type="file" id="exampleInputFile">
                                     <p class="help-block">Masukan Gambar Post</p>
                                 </div>
                                 <div class="form-group">
                                     <label >Kategori Ikan</label>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="inputkategori" id="optionsRadios1" value="tawar" checked>
+                                            <input type="radio" name="inputkategori" id="optionsRadios1" value="tawar" <?php if($listpost->jenis_ikan=="tawar"){echo 'checked';} ?>>
                                             Tawar
                                         </label>
                                     </div>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="inputkategori" id="optionsRadios2" value="laut">
+                                            <input type="radio" name="inputkategori" id="optionsRadios2" value="laut" <?php if($listpost->jenis_ikan=="laut"){echo 'checked';} ?>>
                                             Laut
                                         </label>
                                     </div>
@@ -53,26 +54,26 @@
                                     <label >Jenis Post</label>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="inputjenis" id="Radios1" value="produsen" checked>
+                                            <input type="radio" name="inputjenis" id="Radios1" value="produsen" <?php if($listpost->jenis_penjual=="produsen"){echo 'checked';} ?>>
                                             Produsen
                                         </label>
                                     </div>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="inputjenis" id="Radios2" value="grosir">
+                                            <input type="radio" name="inputjenis" id="Radios2" value="grosir" <?php if($listpost->jenis_penjual=="grosir"){echo 'checked';} ?>>
                                             Grosir
                                         </label>
                                     </div>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="inputjenis" id="Radios3" value="eceran">
+                                            <input type="radio" name="inputjenis" id="Radios3" value="eceran" <?php if($listpost->jenis_penjual=="eceran"){echo 'checked';} ?>>
                                             Eceran
                                         </label>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputjudul">Harga</label>
-                                    <input type="number" name="harga_kg" class="form-control" id="harga" placeholder="" required>
+                                    <input type="number" name="harga_kg" class="form-control" id="harga" value="<?php echo $listpost->harga_kg; ?>" required>
                                 </div>
 
 
@@ -80,19 +81,19 @@
                                     <div class="row">
                                         <div class="col-xs-3">
                                             <label >Provinsi</label>
-                                            <input type="text" id="provinsi" name="provinsi" required>
+                                            <input type="text" id="provinsi" name="provinsi" value="<?php echo $listpost->provinsi; ?>" required>
                                         </div>
                                         <div class="col-xs-3">
                                             <label >Kota</label>
-                                            <input type="text" id="kota" name="kota" required>
+                                            <input type="text" id="kota" name="kota" value="<?php echo $listpost->kota; ?>" required>
                                         </div>
                                         <div class="col-xs-3">
                                             <label >Longtitude</label>
-                                            <input type="text" id="long" name="longtitude" required>
+                                            <input type="text" id="long" name="longtitude" value="<?php echo $listpost->longtitude; ?>" required>
                                         </div>
                                         <div class="col-xs-3">
                                             <label >Latitude</label>
-                                            <input type="text" id="lat" name="latitude" required>
+                                            <input type="text" id="lat" name="latitude" value="<?php echo $listpost->latitude; ?>" required>
                                         </div>
 
                                     </div>
@@ -106,6 +107,7 @@
 
 
                             <div class="box-footer">
+                                <input type="hidden" name="id" class="form-control" id="exampleInputjudul" value="<?php echo $listpost->id_posting; ?>" required>
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
                           </div>
@@ -131,10 +133,15 @@
             navigator.geolocation.getCurrentPosition(showPosition);
         }
         function showPosition(position) {
-            lat=position.coords.latitude;
-            console.log(lat);
-            long=position.coords.longitude;
-            console.log(long);
+            <?php $lat = (float)$listpost->latitude ; ?>
+            <?php $long = (float)$listpost->longtitude ;  ?>
+
+            lat=<?php echo $lat; ?>;
+            console.log(<?php echo $lat; ?>);
+            long=<?php echo $long; ?>;
+            console.log(<?php echo $long; ?>);
+
+
             out_map();
         }
 

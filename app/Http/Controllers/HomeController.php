@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input ;
 use DB;
 
 class HomeController extends Controller
@@ -62,8 +63,17 @@ class HomeController extends Controller
                 base_path() . '/public/image/news/', $imageName
             );
             DB::insert("call SP_InputPicture(?,?,?)", array($id, 1, "/image/news/$imageName"));
-            return redirect('posting');
+            return redirect("posting/$id");
         }
+    }
+    public function submitcomment (Request $request){
+        $input = $request->all();
+
+        $komentar=$input['komentar'];
+        $id_user=$input['id_user'];
+        $id_posting=$input['id_posting'];
+        DB::insert("call SP_NewComment(?,?,?)",array($id_posting,$id_user,$komentar));
+        return redirect("posting/$id_posting");
     }
 
 }

@@ -86,17 +86,19 @@
                                     <!-- /.box-comment -->
                                     @endforeach
                                 </div>
-
+                                <?php if(Auth::check()!=false){ ?>
                                 <div class="box-footer">
-                                    <form action="#" method="post">
+                                    <form action="{{url('/')}}/submit_comment" method="POST">
                                         <img class="img-responsive img-circle img-sm" src="<?php if(Auth::check()!=false){echo Auth::user()->path_gambar;} ?>" alt="Alt Text">
                                         <!-- .img-push is used to add margin to elements next to floating images -->
                                         <div class="img-push">
-                                            <input type="text" class="form-control input-sm" placeholder="Press enter to post comment">
+                                            <input type="text" name="komentar" class="form-control input-sm" placeholder="Press enter to post comment">
+                                            <input type="hidden" name="id_posting" class="form-control input-sm" value="<?php echo $listpost->id_posting; ?>">
+                                            <input type="hidden" name="id_user" class="form-control input-sm" value="<?php if(Auth::check()!=false){echo Auth::user()->id_user;} ?>">
                                         </div>
                                     </form>
                                 </div>
-
+                                <?php } ?>
                     </div>
                     <!-- /.post -->
                 </div>

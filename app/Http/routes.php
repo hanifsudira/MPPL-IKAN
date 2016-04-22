@@ -41,6 +41,7 @@ Route::get('/cek/{id}', 'PostController@cek');
 
 Route::post('/submit_post', 'HomeController@submit');
 
+Route::post('/submit_comment', 'HomeController@submitcomment');
 
 
 Route::auth();

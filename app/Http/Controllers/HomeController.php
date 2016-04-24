@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Auth;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input ;
@@ -41,6 +41,8 @@ class HomeController extends Controller
     public function submit (Request $request){
         $input = $request->all();
 
+        $id_user = Auth::user()->id_user;
+
         $judul=$input['judul'];
         $deskripsi=$input['deskripsi'];
         $jenis_ikan=$input['inputkategori'];
@@ -50,7 +52,7 @@ class HomeController extends Controller
         $longtitude=$input['longtitude'];
         $latitude=$input['latitude'];
         $harga_kg=$input['harga_kg'];
-        $result = DB::select("call SP_NewPost(?,?,?,?,?,?,?,?,?)",array($judul,$deskripsi,$jenis_ikan,$jenis_penjual,$provinsi,$kota,$longtitude,$latitude,$harga_kg));
+        $result = DB::select("call SP_NewPost(?,?,?,?,?,?,?,?,?,?)",array($id_user,$judul,$deskripsi,$jenis_ikan,$jenis_penjual,$provinsi,$kota,$longtitude,$latitude,$harga_kg));
         foreach( $result as $list) {
             $id=$list->id_posting ;
         }

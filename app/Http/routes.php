@@ -35,7 +35,9 @@ Route::post('/listsearch', 'PostController@listsearch');
 
 Route::get('/profile', 'HomeController@profile');
 
-Route::get('/editprofile', 'HomeController@editprofile');
+Route::post('/editprofile', 'HomeController@editprofile');
+
+Route::post('/change_password', 'HomeController@change_password');
 
 Route::get('/cek/{id}', 'PostController@cek');
 
@@ -44,7 +46,6 @@ Route::post('/submit_post', 'HomeController@submit');
 Route::post('/edit_post', 'HomeController@edit');
 
 Route::post('/submit_comment', 'HomeController@submitcomment');
-
 
 Route::auth();
 

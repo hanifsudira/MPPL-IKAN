@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use DB;
 use App\Http\Requests;
 
+use Illuminate\Foundation\Auth\ResetsPasswords;
 
 class PostController extends Controller
 {

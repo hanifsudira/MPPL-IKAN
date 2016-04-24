@@ -1,6 +1,7 @@
 @extends('layouts.home')
 @section('content')
- <!-- Full Width Column -->
+
+     <!-- Full Width Column -->
     <div class="content-wrapper">
 
         <div class="container">
@@ -261,51 +262,64 @@
                       <!-- /.tab-pane -->
 
                       <div class="tab-pane" id="settings">
-                        <form class="form-horizontal">
+                       <form class="form-horizontal" role="form" method="POST" action="{{url('/')}}/editprofile"  enctype='multipart/form-data'>
                           <div class="form-group">
                             <label for="inputName" class="col-sm-2 control-label">Nama Lengkap</label>
 
                             <div class="col-sm-10">
-                              <input type="text" class="form-control" id="inputName" placeholder="Nama Lengkap">
+                              <input type="text" class="form-control" name="fullname" id="inputName" value="{{ Auth::user()->fullname }}" placeholder="Nama Lengkap">
                             </div>
                           </div>
                           <div class="form-group">
-                            <label for="inputName" class="col-sm-2 control-label">Kontak</label>
+                            <label for="inputName" class="col-sm-2 control-label">Email</label>
 
                             <div class="col-sm-10">
-                              <input type="text" class="form-control" id="inputName" placeholder="Kontak">
+                              <input type="email" class="form-control" name="email" id="inputName" value="{{ Auth::user()->email }}" placeholder="Kontak">
                             </div>
                           </div>
                           <div class="form-group">
                             <label for="inputName" class="col-sm-2 control-label">Tempat Lahir</label>
 
                             <div class="col-sm-10">
-                              <input type="text" class="form-control" id="inputName" placeholder="Tempat Lahir">
+                              <input type="text" class="form-control" name="tempat_lahir" id="inputName" value="{{ Auth::user()->tempat_lahir }}" placeholder="Tempat Lahir">
                             </div>
                           </div>
                           <div class="form-group">
                             <label for="inputName" class="col-sm-2 control-label">Tanggal Lahir</label>
 
                             <div class="col-sm-10">
-                              <input type="text" class="form-control" id="datepicker" placeholder="dd/mm/yyyy">
+                              <input type="date" class="form-control datepicker" data-date-format="yyyy-mm-dd"" name="tanggal_lahir" id="datepicker" value="{{ Auth::user()->tanggal_lahir }}" placeholder="yyyy-mm-dd">
                             </div>
                           </div>
                           <!-- select -->
                           <div class="form-group">
                               <label class="col-sm-2 control-label">Gender</label>
                               <div class="col-sm-10">
-                              <select class="col-sm-2 control-label">
-                                <option>Kosong</option>
-                                <option>Laki-laki</option>
-                                <option>Perempuan</option>
-                              </select>
+                              <select class="col-sm-2 control-label" name="jenis_kelamin" value="{{ Auth::user()->jenis_kelamin }}">
+                                @if (Auth::user()->jenis_kelamin)
+                                  <option value="{{ Auth::user()->jenis_kelamin }}">{{ Auth::user()->jenis_kelamin }}</option>
+                                  <option value="Laki-laki">Laki-laki</option>
+                                  <option value="Perempuan">Perempuan</option>
+                                @else 
+                                  <option value="Kosong">Kosong </option>
+                                  <option value="Laki-laki">Laki-laki</option>
+                                  <option value="Perempuan">Perempuan</option>
+                                @endif</select>
                             </div>
                           </div>
-                          <div class="form-group">
+                          <!-- <div class="form-group">
                             <label for="inputExperience" class="col-sm-2 control-label">About</label>
 
                             <div class="col-sm-10">
                               <textarea class="form-control" id="inputExperience" placeholder="About"></textarea>
+                            </div>
+                          </div>
+                           -->
+                           <div class="form-group">
+                            <label for="inputName" class="col-sm-2 control-label">Password</label>
+
+                            <div class="col-sm-10">
+                              <input type="password" class="form-control" name="passwd" id="paswd"  placeholder="Enter Password">
                             </div>
                           </div>
                           <div class="form-group">
@@ -318,26 +332,26 @@
                       <!-- /.tab-pane -->
 
                       <div class="tab-pane" id="moresettings">
-                        <form class="form-horizontal">
+                        <form class="form-horizontal" role="form" method="POST" action="{{url('/')}}/change_password"  enctype='multipart/form-data'>
                           <div class="form-group">
-                            <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+                            <label for="inputEmail" class="col-sm-2 control-label" >Email</label>
 
                             <div class="col-sm-10">
-                              <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                              <input type="email" class="form-control" id="inputEmail" value="{{ Auth::user()->email }}" placeholder="Email" disabled>
                             </div>
                           </div>
                           <div class="form-group">
                             <label for="inputName" class="col-sm-2 control-label">Password Lama</label>
 
                             <div class="col-sm-10">
-                              <input type="text" class="form-control" id="inputName" placeholder="Password Lama">
+                              <input type="password" class="form-control" name="old_password" id="pass_l" placeholder="Password Lama">
                             </div>
                           </div>
                           <div class="form-group">
                             <label for="inputName" class="col-sm-2 control-label">Password Baru</label>
 
                             <div class="col-sm-10">
-                              <input type="text" class="form-control" id="inputName" placeholder="Password Baru">
+                              <input type="password" class="form-control" name="password" id="pass_b"  placeholder="Password Baru">
                             </div>
                           </div>
                           <div class="form-group">

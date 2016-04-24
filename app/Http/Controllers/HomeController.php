@@ -6,6 +6,8 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input ;
 use DB;
+use Validator;
+use Hash;
 
 class HomeController extends Controller
 {
@@ -34,10 +36,37 @@ class HomeController extends Controller
         return view('profile');
     }
 
-    public function editprofile()
-    {
-        return view('editprofile');
+    public function editprofile (Request $request){
+        $input = $request->all();
+
+        $id_user = Auth::user()->id_user;
+
+        $fullname=$input['fullname'];
+        $email=$input['email'];
+        $tempat_lahir=$input['tempat_lahir'];
+        $tanggal_lahir=$input['tanggal_lahir'];
+        $jenis_kelamin=$input['jenis_kelamin'];
+        $result = DB::select("call SP_EditProfile(?,?,?,?,?,?)",array($id_user,$fullname,$email,$tempat_lahir,$tanggal_lahir,$jenis_kelamin));
+
+        return redirect("profile");
     }
+    
+    public function change_password (Request $request){
+        $input = $request->all();
+
+        $id_user = Auth::user()->id_user;
+        $password_user = Auth::user()->password;
+        $old_password=$input['old_password'];
+        $password=$input['password'];
+        $hashedPassword = bcrypt($old_password);
+        $password = bcrypt($password);
+    
+        if (Hash::check($old_password, $hashedPassword)){
+            $result = DB::select("call SP_EditPassword(?,?)",array($id_user,$password));
+        }
+        return redirect("profile");
+    }
+    
     public function submit (Request $request){
         $input = $request->all();
 

@@ -31,17 +31,58 @@
         .content-wrapper{
             margin-top: 50px;
         }
-        .scrollup {
-            width: 40px;
+        .cd-top {
+            display: inline-block;
             height: 40px;
+            width: 40px;
             position: fixed;
-            bottom: 50px;
-            right: 100px;
-            display: none;
-            text-indent: -9999px;
-            background: url('{{asset("image/top.svg")}}') no-repeat center;
-            background-color: #696969;
+            bottom: 40px;
+            right: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+            /* image replacement properties */
+            overflow: hidden;
+            text-indent: 100%;
+            white-space: nowrap;
+            background: rgba(232, 98, 86, 0.8) url('{{asset("image/top.svg")}}') no-repeat center 50%;
+            visibility: hidden;
+            opacity: 0;
+            -webkit-transition: opacity .3s 0s, visibility 0s .3s;
+            -moz-transition: opacity .3s 0s, visibility 0s .3s;
+            transition: opacity .3s 0s, visibility 0s .3s;
         }
+        .cd-top.cd-is-visible, .cd-top.cd-fade-out, .no-touch .cd-top:hover {
+            -webkit-transition: opacity .3s 0s, visibility 0s 0s;
+            -moz-transition: opacity .3s 0s, visibility 0s 0s;
+            transition: opacity .3s 0s, visibility 0s 0s;
+        }
+        .cd-top.cd-is-visible {
+            /* the button becomes visible */
+            visibility: visible;
+            opacity: 1;
+        }
+        .cd-top.cd-fade-out {
+            /* if the user keeps scrolling down, the button is out of focus and becomes less visible */
+            opacity: .5;
+        }
+        .no-touch .cd-top:hover {
+            background-color: #e86256;
+            opacity: 1;
+        }
+        @media only screen and (min-width: 768px) {
+            .cd-top {
+                right: 20px;
+                bottom: 20px;
+            }
+        }
+        @media only screen and (min-width: 1024px) {
+            .cd-top {
+                height: 60px;
+                width: 60px;
+                right: 30px;
+                bottom: 30px;
+            }
+        }
+
     </style>
 </head>
 <!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
@@ -233,7 +274,7 @@
         <!-- /.container -->
     </footer>
 </div>
-<a href="#" class="scrollup">Scroll</a>
+<a href="#0" class="cd-top">Top</a>
 <!-- jQuery 2.1.4 -->
 <script src="{{asset("bower_components/AdminLTE/plugins/jQuery/jQuery-2.1.4.min.js")}}"></script>
 <!-- Bootstrap 3.3.5 -->
@@ -263,21 +304,31 @@
 </script>
 
 <script>
-    $(document).ready(function () {
+    jQuery(document).ready(function($){
+        // browser window scroll (in pixels) after which the "back to top" link is shown
+        var offset = 300,
+        //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+                offset_opacity = 1200,
+        //duration of the top scrolling animation (in ms)
+                scroll_top_duration = 700,
+        //grab the "back to top" link
+                $back_to_top = $('.cd-top');
 
-        $(window).scroll(function () {
-            if ($(this).scrollTop() > 100) {
-                $('.scrollup').fadeIn();
-            } else {
-                $('.scrollup').fadeOut();
+        //hide or show the "back to top" link
+        $(window).scroll(function(){
+            ( $(this).scrollTop() > offset ) ? $back_to_top.addClass('cd-is-visible') : $back_to_top.removeClass('cd-is-visible cd-fade-out');
+            if( $(this).scrollTop() > offset_opacity ) {
+                $back_to_top.addClass('cd-fade-out');
             }
         });
 
-        $('.scrollup').click(function () {
-            $("html, body").animate({
-                scrollTop: 0
-            }, 600);
-            return false;
+        //smooth scroll to top
+        $back_to_top.on('click', function(event){
+            event.preventDefault();
+            $('body,html').animate({
+                        scrollTop: 0 ,
+                    }, scroll_top_duration
+            );
         });
 
     });

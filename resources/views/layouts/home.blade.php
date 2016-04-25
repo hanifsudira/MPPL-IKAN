@@ -27,14 +27,30 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style>
+        .content-wrapper{
+            margin-top: 50px;
+        }
+        .scrollup {
+            width: 40px;
+            height: 40px;
+            position: fixed;
+            bottom: 50px;
+            right: 100px;
+            display: none;
+            text-indent: -9999px;
+            background: url('{{asset("image/top.svg")}}') no-repeat center;
+            background-color: #696969;
+        }
+    </style>
 </head>
 <!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
 <body class="hold-transition skin-blue layout-top-nav">
 <div class="wrapper">
 
     <header class="main-header">
-    
-        <nav class="navbar navbar-static-top" role="navigation">
+
+        <nav class="navbar navbar-fixed-top" role="navigation">
             <div class="container">
                 <div class="navbar-header">
                     <a href="{{url("/")}}" class="navbar-brand">Lapak<b>Ikan</b></a>
@@ -53,25 +69,25 @@
                                     Produsen
                                 </label>
                             </div>
-                          <div class="radio">
-                            <label>
-                              <input type="radio" name="jenis_penjual" id="optionsRadios1" value="grosir" >
-                              Grosir
-                            </label>
-                          </div>
-                          <div class="radio">
-                            <label>
-                              <input type="radio" name="jenis_penjual" id="optionsRadios2" value="eceran">
-                              Eceran
-                            </label>
-                          </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="jenis_penjual" id="optionsRadios1" value="grosir" >
+                                    Grosir
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="jenis_penjual" id="optionsRadios2" value="eceran">
+                                    Eceran
+                                </label>
+                            </div>
                         </div>
                         <div class="form-group">
-                          <select name="jenis_ikan" class="form-control">
-                            <option value="0">Jenis Ikan</option>
-                            <option value="laut">Laut</option>
-                            <option value="tawar">Tawar</option>
-                          </select>
+                            <select name="jenis_ikan" class="form-control">
+                                <option value="0">Jenis Ikan</option>
+                                <option value="laut">Laut</option>
+                                <option value="tawar">Tawar</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <input type="text" name="keyword" class="form-control" id="navbar-search-input" placeholder="Cari">
@@ -79,122 +95,124 @@
                         </div>
                     </form>
                 </div>
-                <?php  
+                <?php
                 // {{{ isset(Auth::user()->username) ? Auth::user()->name : Auth::user()->email }}}
                 ?>
-                
-                <!-- Login -->
+
+                        <!-- Login -->
                 <div class="navbar-custom-menu">
-                  <!-- Right Side Of Navbar -->
-                <ul class="nav navbar-nav navbar-right">
-                    <!-- Authentication Links -->
-                    @if (Auth::guest())
-                         <!-- Login -->
+                    <!-- Right Side Of Navbar -->
+                    <ul class="nav navbar-nav navbar-right">
+                        <!-- Authentication Links -->
+                        @if (Auth::guest())
+                                <!-- Login -->
                         <div class="navbar-custom-menu">
                             <ul class="nav navbar-nav">
-                              <!-- User Account: style can be found in dropdown.less -->
-                              <li class="dropdown user user-menu">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                  <span class="hidden-xs">Login</span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                  <li class="user-header">
-                                    <p>
-                                        Login
-                                    </p>
-                                  </li>
+                                <!-- User Account: style can be found in dropdown.less -->
+                                <li class="dropdown user user-menu">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                        <img src="{{asset("image/user1.png")}}" height="160px" width="160px" class="user-image" alt="User Image">
+                                        <span class="hidden-xs">Login</span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li class="user-header">
+                                            <p>
+                                                Login
+                                            </p>
+                                        </li>
 
 
-                                  <!-- Menu Body -->
-                                  <li class="user-body">
-                                    <div class="row">
-                                      <div class="col-xs-8 text-center">
-                                        <p>Sudah punya akun?</p>
-                                      </div>
-                                      <div class="col-xs-4 text-center">
-                                        <a href="{{ action("PostController@login") }}" class="btn btn-default btn-flat">Login</a>
-                                      </div>
-                                    </div>
-                                    <!-- /.row -->
-                                  </li>
+                                        <!-- Menu Body -->
+                                        <li class="user-body">
+                                            <div class="row">
+                                                <div class="col-xs-8 text-center">
+                                                    <p>Sudah punya akun?</p>
+                                                </div>
+                                                <div class="col-xs-4 text-center">
+                                                    <a href="{{ action("PostController@login") }}" class="btn btn-default btn-flat">Login</a>
+                                                </div>
+                                            </div>
+                                            <!-- /.row -->
+                                        </li>
 
 
-                                  <!-- Menu Footer-->
-                                  <li class="user-footer">
-                                    <div class="col-xs-8 text-center">
-                                      <p>Belum punya akun?</p>
-                                    </div>
-                                    <div class="col-xs-4 text-center">
-                                      <a href="{{ action("PostController@register") }}" class="btn btn-default btn-flat">Register</a>
-                                    </div>
-                                  </li>
-                                </ul>
-                              </li>
+                                        <!-- Menu Footer-->
+                                        <li class="user-footer">
+                                            <div class="col-xs-8 text-center">
+                                                <p>Belum punya akun?</p>
+                                            </div>
+                                            <div class="col-xs-4 text-center">
+                                                <a href="{{ action("PostController@register") }}" class="btn btn-default btn-flat">Register</a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
                             </ul>
-                          </div>
+                        </div>
                         <!--   <li><a href="{{ url('/login') }}">Login</a></li>
                           <li><a href="{{ url('/register') }}">Register</a></li> -->
-                    @else
-                        <div class="navbar-custom-menu">
-                            <ul class="nav navbar-nav">
-                              <!-- User Account: style can be found in dropdown.less -->
-                              <li><a href="{{url("/")}}/newpost">New Post</a></li>
-                              <li class="dropdown user user-menu">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                  <span class="hidden-xs">{{ Auth::user()->username }}</span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li class="user-header"><p> {{ Auth::user()->username }} </p></li>
-                                  
-                                  <!-- Menu Body -->
-                                  <li class="user-body">
-                                    <div class="row">
-                                      <div class="col-xs-8 text-center">
-                                        <p>View Profile</p>
-                                      </div>
-                                      <div class="col-xs-4 text-center">
-                                        <a href="{{ action("HomeController@profile") }}" class="btn btn-default btn-flat">Profile</a>
-                                      </div>
-                                    </div>
-                                    <!-- /.row -->
-                                  </li>
-                                  <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                        @else
+                            <div class="navbar-custom-menu">
+                                <ul class="nav navbar-nav">
+                                    <!-- User Account: style can be found in dropdown.less -->
+                                    <li><a href="{{url("/")}}/newpost">New Post</a></li>
+                                    <li class="dropdown user user-menu">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                            <img src="{{asset("image/user1.png")}}" height="160px" width="160px" class="user-image" alt="User Image">
+                                            <span class="hidden-xs">{{ Auth::user()->username }}</span>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li class="user-header"><p> {{ Auth::user()->username }} </p></li>
+
+                                            <!-- Menu Body -->
+                                            <li class="user-body">
+                                                <div class="row">
+                                                    <div class="col-xs-8 text-center">
+                                                        <p>View Profile</p>
+                                                    </div>
+                                                    <div class="col-xs-4 text-center">
+                                                        <a href="{{ action("HomeController@profile") }}" class="btn btn-default btn-flat">Profile</a>
+                                                    </div>
+                                                </div>
+                                                <!-- /.row -->
+                                            </li>
+                                            <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                                        </ul>
+                                    </li>
                                 </ul>
-                              </li>
-                              </ul>
-                        </div>
-                    @endif
-                </ul>
-                  </div>
+                            </div>
+                        @endif
+                    </ul>
+                </div>
 
                 <!-- Logout -->
                 <div style="display:none" class="navbar-custom-menu" >
                     <ul class="nav navbar-nav">
-                      <!-- User Account: style can be found in dropdown.less -->
-                      <li class="dropdown user user-menu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                          <span class="hidden-xs">Nama</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                          <li class="user-header">
-                            <p>
-                                Nama
-                            </p>
-                          </li>
+                        <!-- User Account: style can be found in dropdown.less -->
+                        <li class="dropdown user user-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <span class="hidden-xs">Nama</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="user-header">
+                                    <p>
+                                        Nama
+                                    </p>
+                                </li>
 
-                          <!-- Menu Footer-->
-                          <li class="user-footer">
-                            <div class="pull-left">
-                              <a href="#" class="btn btn-default btn-flat">Profile</a>
-                            </div>
-                            <div class="pull-right">
-                              <a href="" class="btn btn-default btn-flat">Sign out</a>
-                            </div>
-                          </li>
-                        </ul>
-                      </li>
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a href="" class="btn btn-default btn-flat">Sign out</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
-                  </div>
+                </div>
 
                 <!-- /.navbar-collapse -->
                 <!-- Navbar Right Menu -->
@@ -206,8 +224,8 @@
 
     <!-- Main content -->
     @yield('content')
-    
-    <!-- /.content-wrapper -->
+
+            <!-- /.content-wrapper -->
     <footer class="main-footer">
         <div class="container">
             <strong>Copyright &copy; 2016 <a href="#">Lapak Ikan</a>.</strong> Manajemen Proyek Perangkat Lunak
@@ -215,7 +233,7 @@
         <!-- /.container -->
     </footer>
 </div>
-
+<a href="#" class="scrollup">Scroll</a>
 <!-- jQuery 2.1.4 -->
 <script src="{{asset("bower_components/AdminLTE/plugins/jQuery/jQuery-2.1.4.min.js")}}"></script>
 <!-- Bootstrap 3.3.5 -->
@@ -234,14 +252,36 @@
 <script src="https://cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
 
 <script src="{{asset("bower_components/AdminLTE/plugins/datepicker/bootstrap-datepicker.js")}}"></script>
-    <script>
-      $(function () {
+
+<script>
+    $(function () {
         //Date picker
         $('#datepicker').datepicker({
-          autoclose: true
+            autoclose: true
         });
-      });
-    </script>
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 100) {
+                $('.scrollup').fadeIn();
+            } else {
+                $('.scrollup').fadeOut();
+            }
+        });
+
+        $('.scrollup').click(function () {
+            $("html, body").animate({
+                scrollTop: 0
+            }, 600);
+            return false;
+        });
+
+    });
+</script>
 
 
 </body>

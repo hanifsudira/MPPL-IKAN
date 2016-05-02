@@ -22,7 +22,7 @@
                   <div class="box box-primary">
                     <div class="box-body box-profile">
                       <form role="form" method="POST" action="{{url('/')}}/editprofpic"  enctype='multipart/form-data'>
-                          <img class="profile-user-img img-responsive img-circle" src="<?php echo Auth::user()->path_foto;?>"  alt="User profile picture" >
+                          <img class="profile-user-img img-responsive img-circle img-bordered-sm" src="<?php echo Auth::user()->path_foto;?>"  alt="User profile picture" >
                           <h3 class="profile-username text-center">{{ Auth::user()->fullname }} </h3>
                           <p class="text-muted text-center">{{ Auth::user()->username }}</p>
                           <center><input name="gambar" type="file" id="exampleInputFile" required></center>

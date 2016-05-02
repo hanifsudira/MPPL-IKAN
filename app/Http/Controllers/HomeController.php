@@ -37,7 +37,6 @@ class HomeController extends Controller
         $id = Auth::user()->id_user;
         $data['post_list']= DB::select("call SP_ListProfile(?)",array($id));
         $result=DB::select('call SP_ListPost(?)',array($id));
-        $data['listcomment']=DB::select('call SP_ListComment(?)',array($id));
 
         foreach( $result as $list) {
             $data['listpost']=$list;
@@ -62,7 +61,7 @@ class HomeController extends Controller
         
             $result = DB::select("call SP_InputPicture(?,?,?)", array($id_user, 0, "/image/profile/$imageName"));
         }
-        return view('profile');
+        return redirect("profile");
     }
 
     public function editprofile (Request $request){

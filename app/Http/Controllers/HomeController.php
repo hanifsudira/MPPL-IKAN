@@ -59,9 +59,10 @@ class HomeController extends Controller
             );
 //            print $gambar;
         
-            $result = DB::select("call SP_InputPicture(?,?,?)", array($id_user, 0, "/image/profile/$imageName"));
+            $result = DB::update("call SP_InputPicture(?,?,?)", array($id_user, 0, "/image/profile/$imageName"));
         }
-        return redirect("profile");
+        if($result)
+            return redirect("profile");
     }
 
     public function editprofile (Request $request){
@@ -78,9 +79,10 @@ class HomeController extends Controller
         $tanggal_lahir=$input['tanggal_lahir'];
         $jenis_kelamin=$input['jenis_kelamin'];
         if(Auth::check()){
-            $result = DB::select("call SP_EditProfile(?,?,?,?,?,?)",array($id_user,$fullname,$email,$tempat_lahir,$tanggal_lahir,$jenis_kelamin));
+            $result = DB::update("call SP_EditProfile(?,?,?,?,?,?)",array($id_user,$fullname,$email,$tempat_lahir,$tanggal_lahir,$jenis_kelamin));
         }
-        return redirect("profile");
+        if($result)
+            return redirect("profile");
     }
     
     public function change_password (Request $request){

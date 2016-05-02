@@ -112,16 +112,13 @@
 function initMap() {
    <?php echo "var latt = $listpost->latitude " ?>;
     <?php echo "var long = $listpost->longtitude " ?>;
-
     var myLatLng = {lat:latt , lng: long};
-
   // Create a map object and specify the DOM element for display.
   var map = new google.maps.Map(document.getElementById('map'), {
     center: myLatLng,
     scrollwheel: true,
     zoom: 12
   });
-
   // Create a marker and set its position.
   var marker = new google.maps.Marker({
     map: map,

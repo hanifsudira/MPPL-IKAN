@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Input ;
 use DB;
 use Validator;
 use Hash;
+use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
 class HomeController extends Controller
 {
@@ -33,6 +34,34 @@ class HomeController extends Controller
 
     public function profile()
     {
+        $id = Auth::user()->id_user;
+        $data['post_list']= DB::select("call SP_ListProfile(?)",array($id));
+        $result=DB::select('call SP_ListPost(?)',array($id));
+        $data['listcomment']=DB::select('call SP_ListComment(?)',array($id));
+
+        foreach( $result as $list) {
+            $data['listpost']=$list;
+        }
+
+        return view('profile',$data);
+    }
+
+    public function editprofpic(Request $request)
+    {
+        $input = $request->all();
+        $id_user = Auth::user()->id_user;
+        if(Input::hasFile('gambar')) {
+            $gambar=Input::file('gambar');
+            $imageName = $id_user . '.' .
+                $gambar->getClientOriginalExtension();
+
+            $gambar->move(
+                base_path() . '/public/image/profile/', $imageName
+            );
+//            print $gambar;
+        
+            $result = DB::select("call SP_InputPicture(?,?,?)", array($id_user, 0, "/image/profile/$imageName"));
+        }
         return view('profile');
     }
 
@@ -40,14 +69,18 @@ class HomeController extends Controller
         $input = $request->all();
 
         $id_user = Auth::user()->id_user;
+        $ps = Auth::user()->password;
 
         $fullname=$input['fullname'];
         $email=$input['email'];
+        $passwd=$input['passwd'];
+        $hashedPassword = Hash::make($passwd);
         $tempat_lahir=$input['tempat_lahir'];
         $tanggal_lahir=$input['tanggal_lahir'];
         $jenis_kelamin=$input['jenis_kelamin'];
-        $result = DB::select("call SP_EditProfile(?,?,?,?,?,?)",array($id_user,$fullname,$email,$tempat_lahir,$tanggal_lahir,$jenis_kelamin));
-
+        if(Auth::check()){
+            $result = DB::select("call SP_EditProfile(?,?,?,?,?,?)",array($id_user,$fullname,$email,$tempat_lahir,$tanggal_lahir,$jenis_kelamin));
+        }
         return redirect("profile");
     }
     
@@ -63,6 +96,7 @@ class HomeController extends Controller
     
         if (Hash::check($old_password, $hashedPassword)){
             $result = DB::select("call SP_EditPassword(?,?)",array($id_user,$password));
+       
         }
         return redirect("profile");
     }

@@ -21,12 +21,16 @@
                   <!-- Profile Image -->
                   <div class="box box-primary">
                     <div class="box-body box-profile">
-                      <img class="profile-user-img img-responsive img-circle" src="bower_components/AdminLTE/dist/img/user4-128x128.jpg" alt="User profile picture">
-
-                      <h3 class="profile-username text-center">{{ Auth::user()->name }} </h3>
-
-                      <p class="text-muted text-center">{{ Auth::user()->username }}</p>
-
+                      <form role="form" method="POST" action="{{url('/')}}/editprofpic"  enctype='multipart/form-data'>
+                          <img class="profile-user-img img-responsive img-circle" src="<?php echo Auth::user()->path_foto;?>"  alt="User profile picture" >
+                          <h3 class="profile-username text-center">{{ Auth::user()->fullname }} </h3>
+                          <p class="text-muted text-center">{{ Auth::user()->username }}</p>
+                          <center><input name="gambar" type="file" id="exampleInputFile" required></center>
+                          <p class="help-block" style="text-align:center;">Edit profile picture...</p>
+                          <div class="box-footer">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                          </div>
+                      </form>
                     </div>
                     <!-- /.box-body -->
                   </div>
@@ -86,7 +90,6 @@
                   <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs">
                       <li class="active"><a href="#activity" data-toggle="tab">History Post</a></li>
-                      <li><a href="#timeline" data-toggle="tab">Timeline</a></li>
                       <li><a href="#settings" data-toggle="tab">Edit Akun</a></li>
                       <li><a href="#moresettings" data-toggle="tab">Ganti Password</a></li>
                     </ul>
@@ -94,173 +97,30 @@
                       <div class="active tab-pane" id="activity">
                         <!-- Post -->
                         <div class="post">
-                          <div class="user-block">
-                            <img class="img-circle img-bordered-sm" src="bower_components\AdminLTE\dist\img\user1-128x128.jpg" alt="user image">
-                                <span class="username">
-                                  <a href="#">Jonathan Burke Jr.</a>
-                                  <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
+                          <div class="box-body">
+                            @foreach ($post_list as $list)
+                                <div class="post">
+                                    <div class="user-block">
+                                        <img class="img-circle img-bordered-sm" src="<?php echo ($list->path_foto);?>" alt="<?php echo ($list->username);?> image">
+                                <span class='username'>
+                                  <a href="#"><?php echo ($list->fullname);?></a>
                                 </span>
-                            <span class="description">Shared publicly - 7:30 PM today</span>
-                          </div>
-                          <!-- /.user-block -->
-                          <p>
-                            Lorem ipsum represents a long-held tradition for designers,
-                            typographers and the like. Some people hate it and argue for
-                            its demise, but others ignore the hate as they create awesome
-                            tools to help create filler text for everyone from bacon lovers
-                            to Charlie Sheen fans.
-                          </p>
-                          <ul class="list-inline">
-                            <li><a href="#" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i> Share</a></li>
-                            <li><a href="#" class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i> Like</a>
-                            </li>
-                            <li class="pull-right">
-                              <a href="#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> Comments
-                                (5)</a></li>
-                          </ul>
-                          <div class="box-footer box-comments">
-                            <div class="box-comment">
-                              <!-- User image -->
-                              <img class="img-circle img-sm" src="../dist/img/user3-128x128.jpg" alt="User Image">
+                                        <span class='description'>Shared publicly - <?php echo ($list->waktu);?></span>
+                                    </div>
+                                    <h4><a href="<?php echo url('/');echo "/posting/$list->id_posting";?>"><?php echo ($list->judul);?></a></h4>
+                                    <p>
+                                        <?php echo ($list->deskripsi);?>
+                                    </p>
+                                    <a class="btn btn-primary btn-xs">Read more</a>
+                                </div>
 
-                              <div class="comment-text">
-                                    <span class="username">
-                                      Maria Gonzales
-                                      <span class="text-muted pull-right">8:03 PM Today</span>
-                                    </span><!-- /.username -->
-                                It is a long established fact that a reader will be distracted
-                                by the readable content of a page when looking at its layout.
-                              </div>
-                              <!-- /.comment-text -->
-                            </div>
-                            <!-- /.box-comment -->
-                            <div class="box-comment">
-                              <!-- User image -->
-                              <img class="img-circle img-sm" src="../dist/img/user5-128x128.jpg" alt="User Image">
-
-                              <div class="comment-text">
-                                    <span class="username">
-                                      Nora Havisham
-                                      <span class="text-muted pull-right">8:03 PM Today</span>
-                                    </span><!-- /.username -->
-                                The point of using Lorem Ipsum is that it has a more-or-less
-                                normal distribution of letters, as opposed to using
-                                'Content here, content here', making it look like readable English.
-                              </div>
-                              <!-- /.comment-text -->
-                            </div>
-                            <!-- /.box-comment -->
-                          </div>
-                          <div class="box-footer">
-                            <form action="#" method="post">
-                              <img class="img-responsive img-circle img-sm" src="../dist/img/user4-128x128.jpg" alt="Alt Text">
-                              <!-- .img-push is used to add margin to elements next to floating images -->
-                              <div class="img-push">
-                                <input type="text" class="form-control input-sm" placeholder="Press enter to post comment">
-                              </div>
-                            </form>
-                          </div>
+                                @endforeach                        
                         </div>
+                        </div>  
                         <!-- /.post -->
 
                       </div>
-                      <!-- /.tab-pane -->
-                      <div class="tab-pane" id="timeline">
-                        <!-- The timeline -->
-                        <ul class="timeline timeline-inverse">
-                          <!-- timeline time label -->
-                          <li class="time-label">
-                                <span class="bg-red">
-                                  10 Feb. 2014
-                                </span>
-                          </li>
-                          <!-- /.timeline-label -->
-                          <!-- timeline item -->
-                          <li>
-                            <i class="fa fa-envelope bg-blue"></i>
-
-                            <div class="timeline-item">
-                              <span class="time"><i class="fa fa-clock-o"></i> 12:05</span>
-
-                              <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
-
-                              <div class="timeline-body">
-                                Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
-                                weebly ning heekya handango imeem plugg dopplr jibjab, movity
-                                jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
-                                quora plaxo ideeli hulu weebly balihoo...
-                              </div>
-                              <div class="timeline-footer">
-                                <a class="btn btn-primary btn-xs">Read more</a>
-                                <a class="btn btn-danger btn-xs">Delete</a>
-                              </div>
-                            </div>
-                          </li>
-                          <!-- END timeline item -->
-                          <!-- timeline item -->
-                          <li>
-                            <i class="fa fa-user bg-aqua"></i>
-
-                            <div class="timeline-item">
-                              <span class="time"><i class="fa fa-clock-o"></i> 5 mins ago</span>
-
-                              <h3 class="timeline-header no-border"><a href="#">Sarah Young</a> accepted your friend request
-                              </h3>
-                            </div>
-                          </li>
-                          <!-- END timeline item -->
-                          <!-- timeline item -->
-                          <li>
-                            <i class="fa fa-comments bg-yellow"></i>
-
-                            <div class="timeline-item">
-                              <span class="time"><i class="fa fa-clock-o"></i> 27 mins ago</span>
-
-                              <h3 class="timeline-header"><a href="#">Jay White</a> commented on your post</h3>
-
-                              <div class="timeline-body">
-                                Take me to your leader!
-                                Switzerland is small and neutral!
-                                We are more like Germany, ambitious and misunderstood!
-                              </div>
-                              <div class="timeline-footer">
-                                <a class="btn btn-warning btn-flat btn-xs">View comment</a>
-                              </div>
-                            </div>
-                          </li>
-                          <!-- END timeline item -->
-                          <!-- timeline time label -->
-                          <li class="time-label">
-                                <span class="bg-green">
-                                  3 Jan. 2014
-                                </span>
-                          </li>
-                          <!-- /.timeline-label -->
-                          <!-- timeline item -->
-                          <li>
-                            <i class="fa fa-camera bg-purple"></i>
-
-                            <div class="timeline-item">
-                              <span class="time"><i class="fa fa-clock-o"></i> 2 days ago</span>
-
-                              <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos</h3>
-
-                              <div class="timeline-body">
-                                <img src="http://placehold.it/150x100" alt="..." class="margin">
-                                <img src="http://placehold.it/150x100" alt="..." class="margin">
-                                <img src="http://placehold.it/150x100" alt="..." class="margin">
-                                <img src="http://placehold.it/150x100" alt="..." class="margin">
-                              </div>
-                            </div>
-                          </li>
-                          <!-- END timeline item -->
-                          <li>
-                            <i class="fa fa-clock-o bg-gray"></i>
-                          </li>
-                        </ul>
-                      </div>
-                      <!-- /.tab-pane -->
-
+                      
                       <div class="tab-pane" id="settings">
                        <form class="form-horizontal" role="form" method="POST" action="{{url('/')}}/editprofile"  enctype='multipart/form-data'>
                           <div class="form-group">
@@ -295,11 +155,14 @@
                           <div class="form-group">
                               <label class="col-sm-2 control-label">Gender</label>
                               <div class="col-sm-10">
-                              <select class="col-sm-2 control-label" name="jenis_kelamin" value="{{ Auth::user()->jenis_kelamin }}">
+                              <select class="form-control col-sm-2" name="jenis_kelamin" value="{{ Auth::user()->jenis_kelamin }}">
                                 @if (Auth::user()->jenis_kelamin)
                                   <option value="{{ Auth::user()->jenis_kelamin }}">{{ Auth::user()->jenis_kelamin }}</option>
-                                  <option value="Laki-laki">Laki-laki</option>
-                                  <option value="Perempuan">Perempuan</option>
+                                  @if(Auth::user()->jenis_kelamin=="Laki-laki")
+                                    <option value="Perempuan">Perempuan</option>
+                                  @else 
+                                    <option value="Laki-laki">Laki-laki</option>
+                                  @endif
                                 @else 
                                   <option value="Kosong">Kosong </option>
                                   <option value="Laki-laki">Laki-laki</option>

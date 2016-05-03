@@ -45,6 +45,19 @@ class HomeController extends Controller
         return view('profile',$data);
     }
 
+    public function lihatprofile()
+    {
+        $id = Auth::user()->id_user;
+        $data['post_list']= DB::select("call SP_ListProfile(?)",array($id));
+        $result=DB::select('call SP_ListPost(?)',array($id));
+
+        foreach( $result as $list) {
+            $data['listpost']=$list;
+        }
+
+        return view('lihatprofile',$data);
+    }
+
     public function editprofpic(Request $request)
     {
         $input = $request->all();

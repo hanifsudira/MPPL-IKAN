@@ -96,8 +96,6 @@
                   <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs">
                       <li class="active"><a href="#activity" data-toggle="tab">History Post</a></li>
-                      <li><a href="#settings" data-toggle="tab">Edit Akun</a></li>
-                      <li><a href="#moresettings" data-toggle="tab">Ganti Password</a></li>
                     </ul>
                     <div class="tab-content">
                       <div class="active tab-pane" id="activity">

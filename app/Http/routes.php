@@ -35,6 +35,8 @@ Route::post('/listsearch', 'PostController@listsearch');
 
 Route::get('/profile', 'HomeController@profile');
 
+Route::get('/lihatprofile', 'HomeController@lihatprofile');
+
 Route::post('/editprofpic', 'HomeController@editprofpic');
 
 Route::post('/editprofile', 'HomeController@editprofile');

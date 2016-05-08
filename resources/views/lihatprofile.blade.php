@@ -22,9 +22,9 @@
                   <div class="box box-primary">
                     <div class="box-body box-profile">
                       <form role="form" method="POST" action="{{url('/')}}/editprofpic"  enctype='multipart/form-data'>
-                          <img class="profile-user-img img-responsive img-circle img-bordered-sm" src="<?php echo Auth::user()->path_foto;?>"  alt="User profile picture" >
-                          <h3 class="profile-username text-center">{{ Auth::user()->fullname }} </h3>
-                          <p class="text-muted text-center">{{ Auth::user()->username }}</p>
+                          <img class="profile-user-img img-responsive img-circle img-bordered-sm" src="<?php echo $listprofile->path_foto;?>"  alt="User profile picture" >
+                          <h3 class="profile-username text-center">{{ $listprofile->fullname }} </h3>
+                          <p class="text-muted text-center">{{ $listprofile->username }}</p>
                           <center><input name="gambar" type="file" id="exampleInputFile" required></center>
                           <p class="help-block" style="text-align:center;">Edit profile picture...</p>
                           <div class="box-footer">
@@ -45,13 +45,13 @@
                     <div class="box-body">
                       <strong><i class="fa fa-user margin-r-5"></i> Username</strong>
 
-                      <p class="text-muted"> {{ Auth::user()->username }}</p>
+                      <p class="text-muted"> {{ $listprofile->username }}</p>
 
                       <hr>
 
                       <strong><i class="fa fa-envelope margin-r-5"></i> Email</strong>
 
-                      <p class="text-muted"> {{ Auth::user()->email }}</p>
+                      <p class="text-muted"> {{ $listprofile->email }}</p>
 
                       <hr>
 
@@ -70,22 +70,45 @@
                       </p>
 
                       <hr>
+                        <?php
+                        $rating = $listprofile->rating;
+                        $arr_rating = explode("|", $rating);
+                        $fix_rating=0;
+                        $id_rating=0;
+                        if($rating!=null && sizeof($arr_rating)>=1){
+                            $flag=0;
+                            foreach ($arr_rating as $value) {
+                                list($id,$nilai) = explode(",", $value);
+                                if(Auth::user()->id_user==(int)$id){
+                                    $id_rating=(int)$nilai;
+                                }
 
-                      <strong><i class="fa fa-star margin-r-5"></i> Rating</strong>
+                                $fix_rating=$fix_rating+(float)$nilai;
+
+                            }
+                            $fix_rating=$fix_rating/(sizeof($arr_rating));
+
+                        }
+
+                        ?>
+                      <strong><i class="fa fa-star margin-r-5"></i> Rating <span>{{$fix_rating}}</span></strong>
                       <br>
-
+                        <form name="FinalAccept" method="POST" action="{{url('/')}}/rating">
+                            <input name="id" value="{{$listprofile->id_user}}" type="hidden" />
                       <fieldset class="rating">
-                        <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                        <input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
-                        <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                        <input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
-                        <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-                        <input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
-                        <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                        <input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
-                        <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-                        <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
-                    </fieldset>
+                        <input onclick="this.form.submit()" type="radio" id="star5" name="rating" value="5.0" <?php if($id_rating==5.0) echo "checked";?> /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+                        <input onclick="this.form.submit()" type="radio" id="star4half" name="rating" value="4.5" <?php if($id_rating==4.5) echo "checked";?> /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+                        <input onclick="this.form.submit()" type="radio" id="star4" name="rating" value="4.0" <?php if($id_rating==4.0) echo "checked";?> /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+                        <input onclick="this.form.submit()" type="radio" id="star3half" name="rating" value="3.5" <?php if($id_rating==3.5) echo "checked";?> /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+                        <input onclick="this.form.submit()" type="radio" id="star3" name="rating" value="3.0" <?php if($id_rating==3.0) echo "checked";?>/><label class = "full" for="star3" title="Meh - 3 stars"></label>
+                        <input onclick="this.form.submit()" type="radio" id="star2half" name="rating" value="2.5" <?php if($id_rating==2.5) echo "checked";?> /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+                        <input onclick="this.form.submit()" type="radio" id="star2" name="rating" value="2.0" <?php if($id_rating==2.0) echo "checked";?>/><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+                        <input onclick="this.form.submit()" type="radio" id="star1half" name="rating" value="1.5" <?php if($id_rating==1.5) echo "checked";?> /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+                        <input onclick="this.form.submit()" type="radio" id="star1" name="rating" value="1.0" <?php if($id_rating==1.0) echo "checked";?>/><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+                        <input onclick="this.form.submit()" type="radio" id="starhalf" name="rating" value="0.5" <?php if($id_rating==0.5) echo "checked";?>/><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+                      </fieldset>
+                        </form>
+
                     </div>
                     <!-- /.box-body -->
                   </div>
@@ -107,7 +130,7 @@
                                     <div class="user-block">
                                         <img class="img-circle img-bordered-sm" src="<?php echo ($list->path_foto);?>" alt="<?php echo ($list->username);?> image">
                                 <span class='username'>
-                                  <a href="#"><?php echo ($list->fullname);?></a>
+                                  <a href="<?php echo url('/');echo "/lihatprofile/$list->id_user";?>"><?php echo ($list->fullname);?></a>
                                 </span>
                                         <span class='description'>Shared publicly - <?php echo ($list->waktu);?></span>
                                     </div>
@@ -118,7 +141,7 @@
                                     <a class="btn btn-primary btn-xs">Read more</a>
                                 </div>
 
-                                @endforeach                        
+                                @endforeach
                         </div>
                         </div>  
                         <!-- /.post -->
@@ -131,38 +154,38 @@
                             <label for="inputName" class="col-sm-2 control-label">Nama Lengkap</label>
 
                             <div class="col-sm-10">
-                              <input type="text" class="form-control" name="fullname" id="inputName" value="{{ Auth::user()->fullname }}" placeholder="Nama Lengkap">
+                              <input type="text" class="form-control" name="fullname" id="inputName" value="{{ $listprofile->fullname }}" placeholder="Nama Lengkap">
                             </div>
                           </div>
                           <div class="form-group">
                             <label for="inputName" class="col-sm-2 control-label">Email</label>
 
                             <div class="col-sm-10">
-                              <input type="email" class="form-control" name="email" id="inputName" value="{{ Auth::user()->email }}" placeholder="Kontak">
+                              <input type="email" class="form-control" name="email" id="inputName" value="{{ $listprofile->email }}" placeholder="Kontak">
                             </div>
                           </div>
                           <div class="form-group">
                             <label for="inputName" class="col-sm-2 control-label">Tempat Lahir</label>
 
                             <div class="col-sm-10">
-                              <input type="text" class="form-control" name="tempat_lahir" id="inputName" value="{{ Auth::user()->tempat_lahir }}" placeholder="Tempat Lahir">
+                              <input type="text" class="form-control" name="tempat_lahir" id="inputName" value="{{ $listprofile->tempat_lahir }}" placeholder="Tempat Lahir">
                             </div>
                           </div>
                           <div class="form-group">
                             <label for="inputName" class="col-sm-2 control-label">Tanggal Lahir</label>
 
                             <div class="col-sm-10">
-                              <input type="date" class="form-control datepicker" data-date-format="yyyy-mm-dd"" name="tanggal_lahir" id="datepicker" value="{{ Auth::user()->tanggal_lahir }}" placeholder="yyyy-mm-dd">
+                              <input type="date" class="form-control datepicker" data-date-format="yyyy-mm-dd"" name="tanggal_lahir" id="datepicker" value="{{ $listprofile->tanggal_lahir }}" placeholder="yyyy-mm-dd">
                             </div>
                           </div>
                           <!-- select -->
                           <div class="form-group">
                               <label class="col-sm-2 control-label">Gender</label>
                               <div class="col-sm-10">
-                              <select class="form-control col-sm-2" name="jenis_kelamin" value="{{ Auth::user()->jenis_kelamin }}">
-                                @if (Auth::user()->jenis_kelamin)
-                                  <option value="{{ Auth::user()->jenis_kelamin }}">{{ Auth::user()->jenis_kelamin }}</option>
-                                  @if(Auth::user()->jenis_kelamin=="Laki-laki")
+                              <select class="form-control col-sm-2" name="jenis_kelamin" value="{{ $listprofile->jenis_kelamin }}">
+                                @if ($listprofile->jenis_kelamin)
+                                  <option value="{{ $listprofile->jenis_kelamin }}">{{ $listprofile->jenis_kelamin }}</option>
+                                  @if($listprofile->jenis_kelamin=="Laki-laki")
                                     <option value="Perempuan">Perempuan</option>
                                   @else 
                                     <option value="Laki-laki">Laki-laki</option>
@@ -204,7 +227,7 @@
                             <label for="inputEmail" class="col-sm-2 control-label" >Email</label>
 
                             <div class="col-sm-10">
-                              <input type="email" class="form-control" id="inputEmail" value="{{ Auth::user()->email }}" placeholder="Email" disabled>
+                              <input type="email" class="form-control" id="inputEmail" value="{{ $listprofile->email }}" placeholder="Email" disabled>
                             </div>
                           </div>
                           <div class="form-group">

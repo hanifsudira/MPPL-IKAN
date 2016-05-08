@@ -19,7 +19,7 @@
                         <div class="user-block">
                             <img class="img-circle img-bordered-sm" src="<?php echo $listpost->path_foto; ?>" alt="user image">
                             <span class="username">
-                              <a href="#"><?php echo $listpost->fullname; ?></a>
+                              <a href="<?php echo url('/');echo "/lihatprofile/$listpost->id_user";?>"><?php echo $listpost->fullname; ?></a>
                               <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
                             </span>
                             <span class="description">Shared publicly - <?php echo $listpost->waktu; ?></span>
@@ -61,12 +61,18 @@
                         </div>
 
                         <ul class="list-inline">
-                            <li><a href="#" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i> Share</a></li>
-                            <li><a href="#" class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i> Like</a>
+                            <li><a href="#" class="link-black text-sm"></a></li>
+                            <li><a href="#" class="link-black text-sm"></i> </a>
                             </li>
                             <li class="pull-right">
+                                <?php $count=0;
+                                foreach ($listcomment as $list)
+                                {
+                                    $count++;
+                                }
+                                ?>
                                 <a href="#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> Comments
-                                    (5)</a></li>
+                                    ({{$count}})</a></li>
                         </ul>
                                 <div class="box-footer box-comments">
                                     @foreach ($listcomment as $list)
@@ -89,7 +95,7 @@
                                 <?php if(Auth::check()!=false){ ?>
                                 <div class="box-footer">
                                     <form action="{{url('/')}}/submit_comment" method="POST">
-                                        <img class="img-responsive img-circle img-sm" src="<?php if(Auth::check()!=false){echo Auth::user()->path_gambar;} ?>" alt="Alt Text">
+                                        <img class="img-responsive img-circle img-sm" src="<?php if(Auth::check()!=false){echo Auth::user()->path_foto;} ?>" alt="Alt Text">
                                         <!-- .img-push is used to add margin to elements next to floating images -->
                                         <div class="img-push">
                                             <input type="text" name="komentar" class="form-control input-sm" placeholder="Press enter to post comment">

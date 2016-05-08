@@ -54,20 +54,6 @@ class PostController extends Controller
         return view('posting',$data);
     }
     
-    public function newpost()
-    {
-        return view('newpost');
-    }
-
-    public function editpost($id)
-    {
-        $result=DB::select('call SP_ListPost(?)',array($id));
-
-        foreach( $result as $list) {
-            $data['listpost']=$list;
-        }
-        return view('editpost',$data);
-    }
 
     public function listsearch(Request $request)
     {

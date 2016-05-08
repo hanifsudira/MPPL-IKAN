@@ -160,7 +160,7 @@
                         </div>
                         <div class="form-group">
                             <select name="jenis_ikan" class="form-control">
-                                <option value="0">Jenis Ikan</option>
+                                <option value="all">Semua Jenis</option>
                                 <option value="laut">Laut</option>
                                 <option value="tawar">Tawar</option>
                             </select>
@@ -234,11 +234,13 @@
                                     <li><a href="{{url("/")}}/newpost">New Post</a></li>
                                     <li class="dropdown user user-menu">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                            <img src="{{asset("image/user1.png")}}" height="160px" width="160px" class="user-image" alt="User Image">
+                                            <img src="{{ Auth::user()->path_foto }}" height="160px" width="160px" class="user-image" alt="User Image">
                                             <span class="hidden-xs">{{ Auth::user()->username }}</span>
                                         </a>
                                         <ul class="dropdown-menu">
-                                            <li class="user-header"><p> {{ Auth::user()->username }} </p></li>
+                                            <li class="user-header"><p> {{ Auth::user()->username }} </p>
+                                                <img src="{{ Auth::user()->path_foto }}" height="300px" width="300px" class="center" alt="User Image">
+                                            </li>
 
                                             <!-- Menu Body -->
                                             <li class="user-body">

@@ -32,27 +32,48 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function profile()
+    public function newpost()
     {
-        $id = Auth::user()->id_user;
-        $data['post_list']= DB::select("call SP_ListProfile(?)",array($id));
+        return view('newpost');
+    }
+
+    public function editpost($id)
+    {
+
         $result=DB::select('call SP_ListPost(?)',array($id));
 
         foreach( $result as $list) {
             $data['listpost']=$list;
         }
+        return view('editpost',$data);
+    }
+
+    public function deletepost($id)
+    {
+        $id_user = Auth::user()->id_user;
+        $result=DB::delete('DELETE FROM Posting WHERE id_posting=? and id_user=?',array($id,$id_user));
+
+        return redirect('profile');
+    }
+
+    public function profile()
+    {
+        $id = Auth::user()->id_user;
+        $data['post_list']= DB::select("call SP_ListProfile(?)",array($id));
 
         return view('profile',$data);
     }
 
-    public function lihatprofile()
+    public function lihatprofile($id_user)
     {
-        $id = Auth::user()->id_user;
-        $data['post_list']= DB::select("call SP_ListProfile(?)",array($id));
-        $result=DB::select('call SP_ListPost(?)',array($id));
+        if($id_user==Auth::user()->id_user)
+            return redirect("profile");         
 
+        $id =(int)$id_user;
+        $data['post_list']= DB::select("call SP_ListProfile(?)",array($id));
+        $result=DB::select('call SP_GetProfile(?)',array($id));
         foreach( $result as $list) {
-            $data['listpost']=$list;
+            $data['listprofile']=$list;
         }
 
         return view('lihatprofile',$data);
@@ -78,16 +99,54 @@ class HomeController extends Controller
             return redirect("profile");
     }
 
+    public function rating(Request $request)
+    {
+        $input = $request->all();
+        $id = $input['id'];
+        $val_rating = $input['rating'];
+        $id_user = Auth::user()->id_user;
+
+        $result= DB::select("call SP_GetRating(?)",array($id));
+        foreach($result as $value ){
+            $rating = $value->rating;
+        }
+        $temp=array();
+
+        $arr_rating = explode("|", $rating);
+        if($rating==null){
+            $final_rating = implode(",",array((string)$id_user,$val_rating));
+        }
+        elseif(sizeof($arr_rating)>=1){
+            $flag=0;
+            foreach ($arr_rating as $value) {
+                if($id_user==explode(",", $value)[0]){
+                    $flag=1;
+                    $value = implode(",",array(explode(",", $value)[0],$val_rating));
+                }
+                array_push($temp,$value);
+            }
+            if($flag==0){
+                array_push($temp,implode(",",array($id_user,$val_rating)));
+            }
+
+            $final_rating = implode("|",$temp);
+
+        }
+
+        var_dump($final_rating);
+
+        $result = DB::update("call SP_SetRating(?,?)", array($final_rating,$id));
+        if($result)
+            return redirect("lihatprofile/$id");
+    }
+
     public function editprofile (Request $request){
         $input = $request->all();
 
         $id_user = Auth::user()->id_user;
-        $ps = Auth::user()->password;
 
         $fullname=$input['fullname'];
         $email=$input['email'];
-        $passwd=$input['passwd'];
-        $hashedPassword = Hash::make($passwd);
         $tempat_lahir=$input['tempat_lahir'];
         $tanggal_lahir=$input['tanggal_lahir'];
         $jenis_kelamin=$input['jenis_kelamin'];
@@ -109,7 +168,7 @@ class HomeController extends Controller
         $password = bcrypt($password);
     
         if (Hash::check($old_password, $hashedPassword)){
-            $result = DB::select("call SP_EditPassword(?,?)",array($id_user,$password));
+            $result = DB::update("call SP_EditPassword(?,?)",array($id_user,$password));
        
         }
         return redirect("profile");

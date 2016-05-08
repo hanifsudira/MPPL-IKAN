@@ -68,7 +68,7 @@
                                 <div class="user-block">
                                     <img class="img-circle img-bordered-sm" src="<?php echo ($list->path_foto);?>" alt="<?php echo ($list->username);?> image">
                                     <span class='username'>
-                                      <a href="#"><?php echo ($list->fullname);?></a>
+                                      <a href="<?php echo url('/');echo "/lihatprofile/$list->id_user";?>"><?php echo ($list->fullname);?></a>
                                     </span>
                                     <span class='description'>Shared publicly - <?php echo ($list->waktu);?></span>
                                 </div>

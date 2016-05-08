@@ -70,22 +70,25 @@
                       </p>
 
                       <hr>
+                        <?php
 
-                      <strong><i class="fa fa-star margin-r-5"></i> Rating</strong>
+                        $rating = Auth::user()->rating;
+                        $arr_rating = explode("|", $rating);
+                        $fix_rating=0;
+                        $fix_rating=0;
+                        if($rating!=null && sizeof($arr_rating)>=1){
+                            foreach ($arr_rating as $value) {
+                                $fix_rating=$fix_rating+(float)explode(",", $value)[1];
+                            }
+                            $fix_rating=$fix_rating/(sizeof($arr_rating));
+
+                        }
+
+                        ?>
+
+                      <strong><i class="fa fa-star margin-r-5"></i> Rating <span>({{$fix_rating}}) </span></strong>
+
                       <br>
-
-                      <fieldset class="rating">
-                        <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                        <input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
-                        <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                        <input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
-                        <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-                        <input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
-                        <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                        <input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
-                        <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-                        <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
-                    </fieldset>
                     </div>
                     <!-- /.box-body -->
                   </div>
@@ -104,23 +107,28 @@
                         <!-- Post -->
                         <div class="post">
                           <div class="box-body">
-                            @foreach ($post_list as $list)
-                                <div class="post">
-                                    <div class="user-block">
-                                        <img class="img-circle img-bordered-sm" src="<?php echo ($list->path_foto);?>" alt="<?php echo ($list->username);?> image">
-                                <span class='username'>
-                                  <a href="#"><?php echo ($list->fullname);?></a>
-                                </span>
-                                        <span class='description'>Shared publicly - <?php echo ($list->waktu);?></span>
-                                    </div>
-                                    <h4><a href="<?php echo url('/');echo "/posting/$list->id_posting";?>"><?php echo ($list->judul);?></a></h4>
-                                    <p>
-                                        <?php echo ($list->deskripsi);?>
-                                    </p>
-                                    <a class="btn btn-primary btn-xs">Read more</a>
-                                </div>
+                              <table class="table table-condensed">
+                                  <thead>
+                                  <tr>
+                                      <th>Judul</th>
+                                      <th>Edit/Delete</th>
+                                  </tr>
+                                  </thead>
+                                  <tbody>
+                                  @foreach ($post_list as $list)
+                                  <tr>
+                                      <td>
+                                          <h4><a href="<?php echo url('/');echo "/posting/$list->id_posting";?>"><?php echo ($list->judul);?></a></h4>
+                                      </td>
+                                      <td>
+                                          <a href="<?php echo url('/');echo "/editpost/$list->id_posting";?>" type="button" class="btn btn-info">Edit</a>
+                                          <a href="<?php echo url('/');echo "/deletepost/$list->id_posting";?>" type="button" class="btn btn-danger">Delete</a>
+                                      </td>
+                                  </tr>
+                                  @endforeach
+                                  </tbody>
+                              </table>
 
-                                @endforeach                        
                         </div>
                         </div>  
                         <!-- /.post -->
@@ -184,6 +192,7 @@
                             </div>
                           </div>
                            -->
+{{--
                            <div class="form-group">
                             <label for="inputName" class="col-sm-2 control-label">Password</label>
 
@@ -191,6 +200,7 @@
                               <input type="password" class="form-control" name="passwd" id="paswd"  placeholder="Enter Password">
                             </div>
                           </div>
+--}}
                           <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
                               <button type="submit" class="btn btn-danger">Submit</button>

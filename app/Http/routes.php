@@ -27,15 +27,19 @@ Route::get('/register2', 'PostController@register');
 
 Route::get('/posting/{id}', 'PostController@posting');
 
-Route::get('/newpost', 'PostController@newpost');
+Route::get('/newpost', 'HomeController@newpost');
 
-Route::get('/editpost/{id}', 'PostController@editpost');
+Route::get('/editpost/{id}', 'HomeController@editpost');
+
+Route::get('/deletepost/{id}', 'HomeController@deletepost');
 
 Route::post('/listsearch', 'PostController@listsearch');
 
 Route::get('/profile', 'HomeController@profile');
 
-Route::get('/lihatprofile', 'HomeController@lihatprofile');
+Route::get('/lihatprofile/{id}', 'HomeController@lihatprofile');
+
+Route::post('/rating', 'HomeController@rating');
 
 Route::post('/editprofpic', 'HomeController@editprofpic');
 

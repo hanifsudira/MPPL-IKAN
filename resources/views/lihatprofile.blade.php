@@ -25,11 +25,11 @@
                           <img class="profile-user-img img-responsive img-circle img-bordered-sm" src="<?php echo $listprofile->path_foto;?>"  alt="User profile picture" >
                           <h3 class="profile-username text-center">{{ $listprofile->fullname }} </h3>
                           <p class="text-muted text-center">{{ $listprofile->username }}</p>
-                          <center><input name="gambar" type="file" id="exampleInputFile" required></center>
+                          <!--center><input name="gambar" type="file" id="exampleInputFile" required></center>
                           <p class="help-block" style="text-align:center;">Edit profile picture...</p>
                           <div class="box-footer">
                             <button type="submit" class="btn btn-primary">Submit</button>
-                          </div>
+                          </div-->
                       </form>
                     </div>
                     <!-- /.box-body -->

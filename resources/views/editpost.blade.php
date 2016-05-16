@@ -27,7 +27,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Deskripsi</label>
-                                    <textarea class="form-control" name="deskripsi" rows="3" style="resize: vertical;" required><?php echo $listpost->deskripsi; ?></textarea>
+                                    <!--textarea class="form-control" name="deskripsi" rows="3" style="resize: vertical;" required></textarea-->
+									<textarea id="editor1" name="deskripsi" rows="10" cols="80"><?php echo $listpost->deskripsi; ?></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputFile">Input Gambar</label>

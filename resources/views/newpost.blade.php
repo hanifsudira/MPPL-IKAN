@@ -27,7 +27,9 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Deskripsi</label>
-                                    <textarea class="form-control" name="deskripsi" rows="3" style="resize: vertical;" placeholder="Enter ..." required></textarea>
+                                    <!--textarea class="form-control" name="deskripsi" rows="3" style="resize: vertical;" placeholder="Enter ..." required></textarea-->
+									<textarea id="editor1" name="deskripsi" rows="10" cols="80"></textarea>
+
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputFile">Input Gambar</label>

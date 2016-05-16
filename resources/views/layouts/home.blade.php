@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="{{asset("bower_components/AdminLTE/dist/css/skins/_all-skins.min.css")}}">
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="{{asset("bower_components/AdminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css")}}">
+	<link rel="stylesheet" href="{{asset("bower_components/AdminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css")}}">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -328,6 +329,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
 <!-- CK Editor -->
 <script src="https://cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
+<script src="{{asset("bower_components/AdminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js")}}"></script>
+
 
 <script src="{{asset("bower_components/AdminLTE/plugins/datepicker/bootstrap-datepicker.js")}}"></script>
 
@@ -338,6 +341,18 @@
             autoclose: true
         });
     });
+</script>
+
+<script>
+  $(function () {
+	// Replace the <textarea id="editor1"> with a CKEditor
+	// instance, using default configuration.
+	CKEDITOR.replace('editor1',{
+		allowedContent: 'p h1 h2 strong em; a[!href]; img[!src,width,height];'
+	});
+	//bootstrap WYSIHTML5 - text editor
+	$(".textarea").wysihtml5();
+  });
 </script>
 
 <script>
